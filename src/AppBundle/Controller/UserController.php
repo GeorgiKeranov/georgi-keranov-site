@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,10 +30,13 @@ class UserController extends Controller
             // Setting the encoded password in our user object.
             $user->setPassword($encodedPassword);
 
-            // Adding ROLE_USER to the new user.
-
-
             $em = $this->getDoctrine()->getManager();
+
+            // Getting the user role by name from the database.
+            $role = $em->getRepository(Role::class)->findOneBy(['name' => 'ROLE_USER']);
+            // Adding ROLE_USER to the new user.
+            $user->setRoles([$role]);
+
             $em->persist($user);
             $em->flush();
 

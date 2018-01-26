@@ -210,6 +210,14 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @param Role[]|Collection $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+
+    /**
      * Returns the roles granted to the user.
      *
      * <code>
