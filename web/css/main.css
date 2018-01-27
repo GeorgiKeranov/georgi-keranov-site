@@ -1,0 +1,138 @@
+body {
+    background-color: black;
+    background-image: url("../img/background.jpg");
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Open Sans,sans-serif;
+    line-height: 1;
+}
+
+.margin-top-50 {
+    margin-top: 50px;
+}
+
+.margin-bot-20 {
+    margin-bottom: 100px;
+}
+
+h1, h2, h3, h4, h5, h6, p, div {
+    color: white;
+}
+
+.row {
+    margin-top: 20px;
+}
+
+.header-img {
+    height: 80px;
+    width: 80px;
+    float: left;
+}
+
+.navbar {
+    padding: 0;
+}
+
+.name {
+    font-weight: 600;
+    margin-top: 20px;
+    color: white;
+    font-size: 20px;
+    padding-bottom: 5px;
+    font-family: Open Sans,sans-serif;
+}
+
+.desc {
+    color:white;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.title {
+    font-weight: 800;
+    font-size: 55px;
+    text-align: center;
+}
+
+.index-image {
+    border-radius: 100%;
+    height: 200px;
+    width: auto;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.small-button {
+    width: 200px;
+}
+
+.row-center {
+    width: 100%;
+    text-align: center;
+}
+
+.icon {
+    float: left;
+    font-size: 35px;
+    margin-right: 20px;
+}
+
+.details {
+    display: inline-block;
+    font-weight: bold;
+    background: limegreen;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 5px;
+}
+
+/*Change icons size here*/
+.social-icons .fa {
+    font-size: 40px;
+}
+/*Change icons circle size and color here*/
+.social-icons .fa {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #FFF;
+    color: rgba(255, 255, 255, 0.8);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.social-icons.icon-circle .fa{
+    border-radius: 100%;
+}
+.social-icons.icon-rounded .fa{
+    border-radius:5px;
+}
+
+.social-icons .fa:hover, .social-icons .fa:active {
+    color: #FFF;
+    -webkit-box-shadow: 1px 1px 3px #333;
+    -moz-box-shadow: 1px 1px 3px #333;
+    box-shadow: 1px 1px 3px #333;
+}
+
+.social-icons .fa-github{background-color:#070709;}
+.social-icons .fa-linkedin-square{background-color:#0085AE;}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.textarea {
+    height: 130px;
+}

@@ -5,14 +5,13 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class AdminController extends Controller
+class ProjectsController extends Controller
 {
-
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/projects", name="projects")
      */
-    public function indexAction()
+    public function projectsAction()
     {
-        return $this->render('admin/admin.html.twig');
+        return $this->render('projects/projects.html.twig');
     }
 }

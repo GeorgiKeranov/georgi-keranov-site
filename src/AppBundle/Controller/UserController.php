@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +22,7 @@ class UserController extends Controller
         $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()) {
             // Encoding plain password with bcrypt
             $encodedPassword = $encoder->encodePassword($user, $user->getPassword());
@@ -43,9 +43,7 @@ class UserController extends Controller
             return $this->redirectToRoute('current_user');
         }
 
-        return $this->render("user/register.html.twig", [
-            'form' => $form->createView()
-        ]);
+        return $this->render("user/register.html.twig");
     }
 
     /**
