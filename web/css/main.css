@@ -83,6 +83,12 @@ h1, h2, h3, h4, h5, h6, p, div {
     margin-right: 20px;
 }
 
+.icon-big-white {
+    font-size: 25px;
+    color: white;
+    line-height: 20px;
+}
+
 .details {
     display: inline-block;
     font-weight: bold;
@@ -135,4 +141,35 @@ h1, h2, h3, h4, h5, h6, p, div {
 
 .textarea {
     height: 130px;
+}
+
+.sidebar {
+    padding-left: 0;
+    padding-right: 0;
+
+    background: #0d0d0d;
+    height: 100%;
+    border: 1px solid;
+}
+
+.sidebar .header{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    background: #1a82ae;
+    border-bottom:1px solid white;
+}
+
+.sidebar a {
+    display: block;
+    padding: 20px 20px 20px 20px;
+    font-size: 20px;
+    border-bottom: 1px solid white;
+}
+
+.sidebar a:hover {
+    background: #ff6307;
+    transition:.5s;
 }
