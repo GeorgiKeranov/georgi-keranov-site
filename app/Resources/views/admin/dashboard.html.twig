@@ -1,0 +1,72 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block main %}
+
+    <div class="row">
+
+        <div class="col">
+            <div class="label">
+                <i class="fa fa-user-circle"></i>
+                <div class="pull-right">
+                    <h3 class="line-height">125</h3>
+                    <h5>New users this month</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="label">
+                <i class="fa fa-eye"></i>
+                <div class="pull-right">
+                    <h3 class="line-height">125</h3>
+                    <h5>New views this month</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="label">
+                <i class="fa fa-tasks"></i>
+                <div class="pull-right">
+                    <h3 class=" line-height">125</h3>
+                    <h5>Project views this month</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row margin-top-50">
+        <div class="col">
+            <h5 class="text-center">Site views for past 10 days</h5>
+            <canvas class="chart" id="myChart" height="50"></canvas>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/Chart.bundle.js') }}"></script>
+    <script>
+
+        // Fake data.
+        var labels = [];
+        var views = [];
+        for(var i = 1; i<10; i++) {
+            labels.push("Day " + i);
+            views.push(i > 5 ? i + 100 : i);
+        }
+
+
+        var ctx = document.getElementById("myChart");
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Views',
+                    data: views,
+                }]
+            }
+        });
+    </script>
+{% endblock %}

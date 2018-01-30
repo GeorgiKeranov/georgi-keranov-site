@@ -1,35 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container-fluid">
+    <div class="container-fluid margin-top-50">
         <div class="row">
 
             <div class="col-sm-2 sidebar">
+
+                {% set route = app.request.attributes.get('_route') %}
                 <div class="header">Admin panel</div>
-                <a>
+                <a href="{{ path('admin_dashboard') }}" class="{{ route == 'admin_dashboard' ? 'active' }}">
                     <i class="fa fa-dashboard icon-big-white"></i>
                     <span class="pull-right">Dashboard</span>
                 </a>
 
-                <a>
+                <a href="{{ path('admin_messages') }}" class="{{ route == 'admin_messages' ? 'active' }}">
                     <i class="fa fa-envelope icon-big-white"></i>
                     <span class="pull-right">Messages</span>
                 </a>
 
-                <a>
+                <a href="{{ path('admin_projects') }}" class="{{ route == 'admin_projects' ? 'active' }}">
                     <i class="fa fa-tasks icon-big-white"></i>
                     <span class="pull-right">Projects</span>
                 </a>
 
-                <a>
+                <a href="{{ path('admin_users') }}" class="{{ route == 'admin_users' ? 'active' }}">
                     <i class="fa fa-user-circle icon-big-white"></i>
                     <span class="pull-right">Users</span>
                 </a>
 
-                <a>
+                <a href="{{ path('admin_comments') }}" class="{{ route == 'admin_comments' ? 'active' }}">
                     <i class="fa fa-comment icon-big-white"></i>
                     <span class="pull-right">Comments</span>
                 </a>
+            </div>
+
+            <div class="col-sm-10">
+                {% block main %}{% endblock %}
             </div>
 
         </div>

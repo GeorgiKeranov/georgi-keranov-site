@@ -16,12 +16,12 @@ body {
     margin-bottom: 100px;
 }
 
-h1, h2, h3, h4, h5, h6, p, div {
-    color: white;
+.margin-left-20 {
+    margin-left: 20px;
 }
 
-.row {
-    margin-top: 20px;
+h1, h2, h3, h4, h5, h6, p, div {
+    color: white;
 }
 
 .header-img {
@@ -167,9 +167,62 @@ h1, h2, h3, h4, h5, h6, p, div {
     padding: 20px 20px 20px 20px;
     font-size: 20px;
     border-bottom: 1px solid white;
+    color: white;
 }
 
 .sidebar a:hover {
     background: #ff6307;
     transition:.5s;
+}
+
+.sidebar .active {
+    background-color: red !important;
+}
+
+.label {
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.label .fa {
+    font-size: 45px;
+}
+
+.label .line-height {
+    line-height: 15px;
+}
+
+.chart {
+    background-color: white;
+}
+
+.table {
+    color: black;
+}
+
+.table-hover thead{
+    background-color: orange;
+}
+
+.table .fa{
+    font-size: 20px;
+    vertical-align: sub;
+}
+
+.table .fa-trash{
+    color: black;
+}
+
+.table .fa-reply {
+    color: orange;
+}
+
+.img-user-table {
+    height: 50px;
+    border-radius: 100%;
+}
+
+.img-table {
+    height: 50px;
 }

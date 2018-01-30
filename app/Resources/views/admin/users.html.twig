@@ -1,0 +1,44 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block main %}
+
+    <a href="#" class="btn btn-outline-warning btn-block">
+        <span class="fa fa-plus"></span>
+        Add new user
+    </a>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Picture</th>
+            <th>Full name</th>
+            <th>Username</th>
+            <th>Roles</th>
+            <th>Edit roles</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-warning">
+            <td>
+                <img class="img-user-table" src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"/>
+            </td>
+            <td>Georgi Keranov</td>
+            <td>bek4o</td>
+            <td>ROLE_ADMIN, ROLE_USER</td>
+            <td>
+                <a href="#" class="btn btn-primary btn-block">
+                    <span class="fa fa-edit"></span>
+                </a>
+            </td>
+            <td>
+                <a href="#" class="btn btn-danger btn-block">
+                    <span class="fa fa-trash"></span>
+                </a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+{% endblock %}
