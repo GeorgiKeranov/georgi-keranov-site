@@ -69,15 +69,35 @@
                     {% endif %}
 
                     {% if is_granted('ROLE_USER') %}
-                        <li {{ route == 'current_user' ? 'class="nav-item active"' }} class="nav-item">
-                            <a class="nav-link" href="{{ path('current_user') }}">
+                        <li class="nav-item dropdown">
+                            <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 Account
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('logout') }}">
-                                Logout
-                            </a>
+                            <div class="dropdown-menu">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <img class="img-header" src="https://s3.amazonaws.com/37assets/svn/1065-IMG_2529.jpg"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <h6 class="color-black">Georgi Keranov</h6>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="{{ path('user_messages') }}">
+                                    <span class="fa fa-envelope"></span>
+                                    Messages
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('account_settings') }}">
+                                    <span class="fa fa-cog"></span>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="{{ path('logout') }}">
+                                    <span class="fa fa-sign-out"></span>
+                                    Logout
+                                </a>
+                            </div>
                         </li>
                     {% endif %}
                 </ul>

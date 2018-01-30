@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container margin-top-50">
+        <form class="form-horizontal" enctype="multipart/form-data" method="post">
+            <div class="row">
+
+                <!-- left column -->
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col">
+                                <h3>Profile picture</h3>
+                                <img id="profilePic" class="img-thumbnail" src="https://s3.amazonaws.com/37assets/svn/1065-IMG_2529.jpg"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h6>Upload a different photo...</h6>
+                                <input id="picture" class="form-control" type="file" name="profilePic"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- edit form column -->
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label class="control-label">First name:</label>
+                                <input class="form-control" type="text" name="firstName"/>
+                            </div>
+
+                            <div class="col">
+                                <label class="control-label">Last name:</label>
+                                <input class="form-control" type="text" name="lastName"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label class="control-label">Username:</label>
+                                <input class="form-control" type="text" name="username"/>
+                            </div>
+
+                            <div class="col">
+                                <label class="control-label">Email:</label>
+                                <input class="form-control" type="email" name="email"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label class="control-label">New Password:</label>
+                                <input class="form-control" type="password" name="newPassword" placeholder="Not Required"/>
+                            </div>
+
+                            <div class="col">
+                                <label class="control-label">Confirm New Password:</label>
+                                <input class="form-control" type="password" name="confirmNewPassword" placeholder="Not Required"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="text-center">
+                            <label class="control-label">Current Password:</label>
+                            <input class="form-control" type="password" name="curPassword" placeholder="Required"/>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <input class="btn btn-outline-light btn-block" value="Save Changes" type="submit"/>
+                        <a class="btn btn-outline-dark btn-block" href="{{ path('homepage') }}">Cancel</a>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+{% endblock %}
