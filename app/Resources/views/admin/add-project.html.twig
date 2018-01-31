@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container margin-top-50">
+
+        <h2 class="text-center">Add New Project</h2>
+        <hr/>
+
+        <form method="post">
+            <div class="row">
+
+                <div class="col-5">
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <h5 class="text-center">Main image</h5>
+                            <div class="add-image-big center">
+                                <span class="fa fa-plus"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <div class="row form-group">
+                                <div class="col">
+                                    <div class="add-image-small center">
+                                        <span  class="fa fa-plus"></span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="add-image-small center">
+                                        <span  class="fa fa-plus"></span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="add-image-small center">
+                                        <span  class="fa fa-plus"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col">
+                                    <div class="add-image-small center">
+                                        <span  class="fa fa-plus"></span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="add-image-small center">
+                                        <span  class="fa fa-plus"></span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="add-image-small center">
+                                        <span  class="fa fa-plus"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-7">
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label>Name of the project:</label>
+                            <input class="form-control" type="text" name="name" placeholder="Project name"/>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label>Programming languages:</label>
+                            <input class="form-control" type="text" name="programming_languages" placeholder="Example: PHP, JavaScript, HTML"/>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label>Technologies used:</label>
+                            <input class="form-control" type="text" name="technologies_used" placeholder="Example: AJAX, Symfony 3"/>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label>Description:</label>
+                            <textarea rows="7" class="form-control" name="description" placeholder="Description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label>Github link:</label>
+                            <input class="form-control" type="text" name="github_link" placeholder="Example: https://github.com/GeorgiKeranov/georgi-keranov-site"/>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <label>Youtube link:</label>
+                            <input class="form-control" type="text" name="youtube_link" placeholder="Example: https://www.youtube.com/watch?v=jOXbmRs2eoA"/>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col">
+                            <input class="btn btn-success" type="submit" value="Save"/>
+                            <a href="{{ path('admin_projects') }}" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

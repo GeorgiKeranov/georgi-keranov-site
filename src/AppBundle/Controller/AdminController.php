@@ -55,4 +55,11 @@ class AdminController extends Controller
     {
         return $this->render('admin/comments.html.twig');
     }
+
+    /**
+     * @Route("/admin/project/add", name="project_add")
+     */
+    public function addProjectAction() {
+        return $this->render('admin/add-project.html.twig');
+    }
 }

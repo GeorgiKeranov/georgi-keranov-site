@@ -240,3 +240,45 @@ h1, h2, h3, h4, h5, h6, p, div {
 .img-thumbnail {
     height: 300px;
 }
+
+.add-image-big {
+    height: 200px;
+    width: 200px;
+    background-color: #cbd2d7;;
+    border: 2px dashed white;
+    text-align: center;
+}
+
+.add-image-big .fa {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 100%;
+}
+
+.add-image-big .fa-plus {
+    margin-top: 70px;
+    font-size: 40px;
+    background-color: #1F9BCF;
+}
+
+.add-image-small {
+    height: 100px;
+    width: 100px;
+    background-color: #cbd2d7;;
+    border: 2px dashed white;
+    text-align: center;
+}
+
+.add-image-small .fa {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 100%;
+}
+
+.add-image-small .fa-plus {
+    margin-top: 30px;
+    font-size: 30px;
+    background-color: #1F9BCF;
+}
