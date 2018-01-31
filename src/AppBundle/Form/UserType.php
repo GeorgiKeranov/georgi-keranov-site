@@ -27,8 +27,7 @@ class UserType extends AbstractType
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password']
             ])
-            ->add('email', EmailType::class)
-            ->add('submit', SubmitType::class, ['label' => 'Register']);
+            ->add('email', EmailType::class);
     }/**
      * {@inheritdoc}
      */

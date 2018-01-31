@@ -40,10 +40,10 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('current_user');
+            return $this->redirectToRoute('homepage');
         }
 
-        return $this->render("user/register.html.twig");
+        return $this->render("user/register.html.twig", ["form_dump" => $form, "form" => $form->createView()]);
     }
 
     /**
