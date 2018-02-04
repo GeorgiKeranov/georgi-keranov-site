@@ -246,7 +246,7 @@ hr {
     height: 300px;
 }
 
-.add-image-big {
+.main-image-add {
     height: 200px;
     width: 200px;
     background-color: #cbd2d7;;
@@ -254,20 +254,39 @@ hr {
     text-align: center;
 }
 
-.add-image-big .fa {
+.main-image-add .fa {
     width: 50px;
     height: 50px;
     line-height: 50px;
     border-radius: 100%;
 }
 
-.add-image-big .fa-plus {
+.main-image-add .fa-plus {
     margin-top: 70px;
     font-size: 40px;
     background-color: #1F9BCF;
 }
 
-.add-image-small {
+.main-image-add img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.main-image-add .fa-remove {
+    position: absolute;
+    background-color: red;
+    border-radius: 100%;
+    font-size: 20px;
+    text-align: center;
+    line-height: 36px;
+    height: 40px;
+    width: 40px;
+    margin-left: 80px;
+    margin-top: -20px;
+    cursor: pointer;
+}
+
+.image-add {
     height: 100px;
     width: 100px;
     background-color: #cbd2d7;;
@@ -275,15 +294,62 @@ hr {
     text-align: center;
 }
 
-.add-image-small .fa {
+.image-add {
+    height: 100px;
+    width: 100px;
+    background-color: #cbd2d7;;
+    border: 2px dashed white;
+    text-align: center;
+}
+
+
+.image-add .fa {
     width: 30px;
     height: 30px;
     line-height: 30px;
     border-radius: 100%;
 }
 
-.add-image-small .fa-plus {
+.image-add .fa-plus {
     margin-top: 30px;
     font-size: 30px;
     background-color: #1F9BCF;
+}
+
+.image-view {
+    height: 100px;
+    width: 100px;
+    background-color: #cbd2d7;;
+    border: 2px dashed white;
+    text-align: center;
+}
+
+.image-view img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.image-view .fa-remove {
+    position: absolute;
+    background-color: red;
+    border-radius: 100%;
+    font-size: 15px;
+    text-align: center;
+    line-height: 28px;
+    height: 30px;
+    width: 30px;
+    margin-left: 20px;
+    margin-top: -5px;
+    cursor: pointer;
+}
+
+
+.center-vertical {
+    min-height: 10em;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.hidden {
+    display: none;
 }

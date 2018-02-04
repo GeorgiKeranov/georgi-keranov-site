@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Project
@@ -37,9 +39,11 @@ class Project
     private $description;
 
     /**
-     * @var string
+     * @var string|File
      *
-     * @ORM\Column(name="image_name", type="string", length=255)
+     * @ORM\Column(name="image_name", type="string", length=255, nullable=true)
+     *
+     * @Assert\File(mimeTypes={ "image/*" })
      */
     private $imageName;
 
@@ -74,7 +78,7 @@ class Project
     /**
      * @var Collection|Image[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Image", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Image", mappedBy="project", cascade={"persist"})
      */
     private $images;
 
@@ -84,6 +88,11 @@ class Project
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="project")
      */
     private $comments;
+
+    /**
+     * @var Collection|File[]
+     */
+    private $imageFiles;
 
 
     /**
@@ -147,7 +156,7 @@ class Project
     /**
      * Set imageName
      *
-     * @param string $imageName
+     * @param string|File $imageName
      *
      * @return Project
      */
@@ -161,7 +170,7 @@ class Project
     /**
      * Get imageName
      *
-     * @return string
+     * @return string|File
      */
     public function getImageName()
     {
@@ -278,6 +287,22 @@ class Project
     public function setComments($comments)
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * @return Collection|File[]
+     */
+    public function getImageFiles()
+    {
+        return $this->imageFiles;
+    }
+
+    /**
+     * @param Collection|File[] $imageFiles
+     */
+    public function setImageFiles($imageFiles)
+    {
+        $this->imageFiles = $imageFiles;
     }
 
 
