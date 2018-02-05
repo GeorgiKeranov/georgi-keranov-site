@@ -27,7 +27,7 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 
@@ -41,7 +41,7 @@ class Project
     /**
      * @var string|File
      *
-     * @ORM\Column(name="image_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="image_name", type="string", length=255, nullable=true, unique=true)
      *
      * @Assert\File(mimeTypes={ "image/*" })
      */
@@ -50,14 +50,14 @@ class Project
     /**
      * @var string
      *
-     * @ORM\Column(name="youtube_link", type="string", length=255)
+     * @ORM\Column(name="youtube_link", type="string", length=255, nullable=true, unique=true)
      */
     private $youtubeLink;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="github_link", type="string", length=255)
+     * @ORM\Column(name="github_link", type="string", length=255, nullable=true, unique=true)
      */
     private $githubLink;
 
@@ -88,6 +88,13 @@ class Project
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="project")
      */
     private $comments;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_created", type="datetime")
+     */
+    private $dateCreated;
 
     /**
      * @var Collection|File[]
@@ -303,6 +310,22 @@ class Project
     public function setImageFiles($imageFiles)
     {
         $this->imageFiles = $imageFiles;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
+
+    /**
+     * @param \DateTime $dateCreated
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this->dateCreated = $dateCreated;
     }
 
 
