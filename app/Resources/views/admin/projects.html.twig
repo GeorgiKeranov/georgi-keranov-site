@@ -18,6 +18,7 @@
         </tr>
         </thead>
         <tbody>
+        {% for project in projects %}
         <tr class="table-warning">
             <td>
                 <a href="#" class="btn btn-primary btn-block">
@@ -25,50 +26,24 @@
                 </a>
             </td>
             <td>
-                <a href="#" class="btn btn-danger btn-block">
-                    <span class="fa fa-trash"></span>
-                </a>
+                <form method="POST" action="{{ path('project_remove', { 'name': project.name }) }}">
+                    <button type="submit" class="btn btn-danger btn-block">
+                        <span class="fa fa-trash"></span>
+                    </button>
+                </form>
             </td>
             <td>
-                <img class="img-table" src="http://nounitesportal.com/wp-content/uploads/2017/08/noun-project.jpg"/>
+                {% if project.imageName %}
+                    <img class="img-table" src="../uploads/images/{{ project.imageName }}"/>
+                {% endif %}
+                {% if not project.imageName %}
+                    <img class="img-table" src="{{ asset('img/no-image-avalible.png') }}"/>
+                {% endif %}
             </td>
-            <td>Blog</td>
-            <td>2018/01/02</td>
+            <td>{{ project.name }}</td>
+            <td>{{ project.dateCreated|date("j F Y") }}</td>
         </tr>
-        <tr class="table-warning">
-            <td>
-                <a href="#" class="btn btn-primary btn-block">
-                    <span class="fa fa-edit"></span>
-                </a>
-            </td>
-            <td>
-                <a href="#" class="btn btn-danger btn-block">
-                    <span class="fa fa-trash"></span>
-                </a>
-            </td>
-            <td>
-                <img class="img-table" src="http://nounitesportal.com/wp-content/uploads/2017/08/noun-project.jpg"/>
-            </td>
-            <td>Blog</td>
-            <td>2018/01/02</td>
-        </tr>
-        <tr class="table-warning">
-            <td>
-                <a href="#" class="btn btn-primary btn-block">
-                    <span class="fa fa-edit"></span>
-                </a>
-            </td>
-            <td>
-                <a href="#" class="btn btn-danger btn-block">
-                    <span class="fa fa-trash"></span>
-                </a>
-            </td>
-            <td>
-                <img class="img-table" src="http://nounitesportal.com/wp-content/uploads/2017/08/noun-project.jpg"/>
-            </td>
-            <td>Blog</td>
-            <td>2018/01/02</td>
-        </tr>
+        {% endfor %}
         </tbody>
     </table>
 

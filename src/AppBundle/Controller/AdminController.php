@@ -41,7 +41,12 @@ class AdminController extends Controller
      */
     public function projectsAction()
     {
-        return $this->render('admin/projects.html.twig');
+        $allProjects = $this
+            ->getDoctrine()
+            ->getRepository(Project::class)
+            ->findAll();
+
+        return $this->render('admin/projects.html.twig', ['projects' => $allProjects]);
     }
 
     /**

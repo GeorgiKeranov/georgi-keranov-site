@@ -5,8 +5,10 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Project;
 use AppBundle\Form\ProjectType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -81,5 +83,37 @@ class ProjectsController extends Controller
         }
 
         return $this->render('admin/add-project.html.twig', ["form" => $form->createView()] );
+    }
+
+    /**
+     * @Route("/admin/project/remove/{name}", name="project_remove")
+     * @Method({"POST"})
+     */
+    public function deleteProjectAction($name) {
+
+        // Finding the project for deleting by name.
+        $project = $this->getDoctrine()
+            ->getRepository(Project::class)
+            ->findOneBy(['name' => $name]);
+
+        // Deleting images that are saved in the local storage.
+        $images = $project->getImages();
+        if($images) {
+            foreach($images as $image) {
+                unlink("../web/uploads/images/" . $image->getName());
+            }
+        }
+
+        $mainImage = $project->getimageName();
+        if($mainImage) {
+            unlink("../web/uploads/images/" . $mainImage);
+        }
+
+        // Deleting project and related fields.
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($project);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_projects');
     }
 }
