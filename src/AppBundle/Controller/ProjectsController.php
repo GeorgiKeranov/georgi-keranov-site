@@ -19,7 +19,25 @@ class ProjectsController extends Controller
      */
     public function projectsAction()
     {
-        return $this->render('projects/projects.html.twig');
+        $allProjects = $this
+            ->getDoctrine()
+            ->getRepository(Project::class)
+            ->findAll();
+
+        return $this->render('projects/projects.html.twig', ['projects' => $allProjects]);
+    }
+
+    /**
+     * @Route("/project/{name}", name="project_view")
+     */
+    public function viewProjectAction($name) {
+
+        $project = $this
+            ->getDoctrine()
+            ->getRepository(Project::class)
+            ->findOneBy(['name' => $name]);
+
+        return $this->render('projects/project.html.twig', ['project' => $project]);
     }
 
     /**
