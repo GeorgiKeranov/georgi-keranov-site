@@ -30,12 +30,7 @@ class ProjectsController extends Controller
     /**
      * @Route("/project/{name}", name="project_view")
      */
-    public function viewProjectAction($name) {
-
-        $project = $this
-            ->getDoctrine()
-            ->getRepository(Project::class)
-            ->findOneBy(['name' => $name]);
+    public function viewProjectAction(Project $project) {
 
         return $this->render('projects/project.html.twig', ['project' => $project]);
     }
@@ -100,7 +95,20 @@ class ProjectsController extends Controller
             return $this->redirectToRoute('admin_projects');
         }
 
-        return $this->render('admin/add-project.html.twig', ["form" => $form->createView()] );
+        return $this->render('admin/functions/add-project.html.twig', ["form" => $form->createView()] );
+    }
+
+    /**
+     * @Route("/admin/project/edit/{name}", name="project_edit")
+     */
+    public function editProjectAction(Project $project) {
+
+        $form = $this->createForm(ProjectType::class)->setData($project);
+
+        return $this->render('admin/functions/edit-project.html.twig', [
+            'form' => $form->createView(),
+            'project' => $project
+        ]);
     }
 
     /**

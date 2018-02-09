@@ -25,7 +25,7 @@ class AdminController extends Controller
      */
     public function dashboardAction()
     {
-        return $this->render('admin/dashboard.html.twig');
+        return $this->render('admin/functions/dashboard.html.twig');
     }
 
     /**
@@ -33,7 +33,7 @@ class AdminController extends Controller
      */
     public function messagesAction()
     {
-        return $this->render('admin/messages.html.twig');
+        return $this->render('admin/functions/messages.html.twig');
     }
 
     /**
@@ -46,7 +46,7 @@ class AdminController extends Controller
             ->getRepository(Project::class)
             ->findAll();
 
-        return $this->render('admin/projects.html.twig', ['projects' => $allProjects]);
+        return $this->render('admin/functions/projects.html.twig', ['projects' => $allProjects]);
     }
 
     /**
@@ -54,7 +54,7 @@ class AdminController extends Controller
      */
     public function usersAction()
     {
-        return $this->render('admin/users.html.twig');
+        return $this->render('admin/functions/users.html.twig');
     }
 
     /**
@@ -62,7 +62,7 @@ class AdminController extends Controller
      */
     public function commentsAction()
     {
-        return $this->render('admin/comments.html.twig');
+        return $this->render('admin/functions/comments.html.twig');
     }
 
 }

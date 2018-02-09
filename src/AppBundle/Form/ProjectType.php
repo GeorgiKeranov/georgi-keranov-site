@@ -20,6 +20,7 @@ class ProjectType extends AbstractType
             ->add('name')
             ->add('description', TextareaType::class)
             ->add('imageName', FileType::class, [
+                'data_class' => null,
                 'required' => false,
                 'label' => false,
                 'attr' => [
@@ -31,6 +32,7 @@ class ProjectType extends AbstractType
             ->add('programmingLanguages')
             ->add('technologiesUsed')
             ->add('imageFiles', CollectionType::class, [
+                'data_class' => null,
                 'entry_type' => FileType::class,
                 'allow_add' => true,
                 'label' => false,

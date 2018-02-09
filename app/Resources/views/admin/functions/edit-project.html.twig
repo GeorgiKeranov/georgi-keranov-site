@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container margin-top-50">
+
+        <h2 class="text-center">Edit Project</h2>
+        <hr/>
+
+        {{ form_start(form) }}
+
+        <div class="row">
+
+            <div class="col-5">
+
+                <div class="row form-group">
+                    <div class="col">
+                        <h5 class="text-center">Main image</h5>
+
+                        <div id="main-image-div" class="main-image-add center hidden">
+                            <span id="main-image-delete" class="fa fa-remove hidden"></span>
+                            <img class="img-thumbnail center" src=""/>
+                            {{ form_row(form.imageName, {'attr': { 'class': 'hidden'}})}}
+                        </div>
+                        <div id="main-image-div-add" class="main-image-add center">
+                            <span class="fa fa-plus"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div id="images" class="col">
+                        <div id="input-temp"></div>
+                        <div class="row form-group">
+                            <div class="col">
+                                <div id="image-div-1" class="image-view center hidden">
+                                    <span class="fa fa-remove hidden"></span>
+                                    <img class="img-thumbnail center"/>
+                                    <input type="file" id="appbundle_project_imageFiles_0" name="appbundle_project[imageFiles][0]" class="hidden"/>
+                                </div>
+                                <div class="image-add center">
+                                    <span class="fa fa-plus"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id="image-div-2" class="image-view center hidden">
+                                    <span class="fa fa-remove hidden"></span>
+                                    <img class="img-thumbnail center"/>
+                                    <input type="file" id="appbundle_project_imageFiles_1" name="appbundle_project[imageFiles][1]" class="hidden"/>
+
+                                </div>
+                                <div class="image-add center">
+                                    <span class="fa fa-plus"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id="image-div-3" class="image-view center hidden">
+                                    <span class="fa fa-remove hidden"></span>
+                                    <img class="img-thumbnail center"/>
+                                    <input type="file" id="appbundle_project_imageFiles_2" name="appbundle_project[imageFiles][2]" class="hidden"/>
+                                </div>
+                                <div class="image-add center">
+                                    <span class="fa fa-plus"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col">
+                                <div id="image-div-4" class="image-view center hidden">
+                                    <span class="fa fa-remove hidden"></span>
+                                    <img class="img-thumbnail center"/>
+                                    <input type="file" id="appbundle_project_imageFiles_3" name="appbundle_project[imageFiles][3]" class="hidden"/>
+                                </div>
+                                <div class="image-add center">
+                                    <span class="fa fa-plus"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id="image-div-5" class="image-view center hidden">
+                                    <span class="fa fa-remove hidden"></span>
+                                    <img class="img-thumbnail center"/>
+                                    <input type="file" id="appbundle_project_imageFiles_4" name="appbundle_project[imageFiles][4]" class="hidden"/>
+                                </div>
+                                <div class="image-add center">
+                                    <span class="fa fa-plus"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div id="image-div-6" class="image-view center hidden">
+                                    <span class="fa fa-remove hidden"></span>
+                                    <img class="img-thumbnail center"/>
+                                    <input type="file" id="appbundle_project_imageFiles_5" name="appbundle_project[imageFiles][5]" class="hidden"/>
+                                </div>
+                                <div class="image-add center">
+                                    <span class="fa fa-plus"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-7">
+
+                <div class="row form-group">
+                    <div class="col">
+                        {{ form_row(form.name, { 'attr': { 'class': 'form-control', 'placeholder': 'Project Name' } }) }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col">
+                        {{ form_row(form.programmingLanguages, { 'attr': { 'class': 'form-control', 'placeholder': 'Example: PHP, JavaScript, HTML' } }) }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col">
+                        {{ form_row(form.technologiesUsed, { 'attr': { 'class': 'form-control', 'placeholder': 'Example: AJAX, Symfony 3' } }) }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col">
+                        {{ form_row(form.description, { 'attr': { 'class': 'form-control', 'placeholder': 'Description', 'rows': '7'} }) }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col">
+                        {{ form_row(form.githubLink, { 'attr': { 'class': 'form-control', 'placeholder': 'Example: https://github.com/GeorgiKeranov/georgi-keranov-site' } }) }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col">
+                        {{ form_row(form.youtubeLink, { 'attr': { 'class': 'form-control', 'placeholder': 'Example: https://www.youtube.com/watch?v=jOXbmRs2eoA' } }) }}
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col">
+                        <input class="btn btn-success" type="submit" value="Save"/>
+                        <a href="{{ path('admin_projects') }}" class="btn btn-danger">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="{{ asset('js/images.js') }}"></script>
+{% endblock %}

@@ -21,7 +21,7 @@
         {% for project in projects %}
         <tr class="table-warning">
             <td>
-                <a href="#" class="btn btn-primary btn-block">
+                <a href="{{ path('project_edit', { 'name': project.name }) }}" class="btn btn-primary btn-block">
                     <span class="fa fa-edit"></span>
                 </a>
             </td>
