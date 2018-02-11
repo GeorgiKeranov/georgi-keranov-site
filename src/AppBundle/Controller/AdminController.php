@@ -44,7 +44,7 @@ class AdminController extends Controller
         $allProjects = $this
             ->getDoctrine()
             ->getRepository(Project::class)
-            ->findAll();
+            ->findBy([], ['dateCreated' => 'DESC']);
 
         return $this->render('admin/functions/projects.html.twig', ['projects' => $allProjects]);
     }

@@ -22,7 +22,7 @@ class ProjectsController extends Controller
         $allProjects = $this
             ->getDoctrine()
             ->getRepository(Project::class)
-            ->findAll();
+            ->findBy([], ['dateCreated' => 'DESC']);
 
         return $this->render('projects/projects.html.twig', ['projects' => $allProjects]);
     }
