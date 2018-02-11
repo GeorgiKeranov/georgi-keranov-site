@@ -286,12 +286,12 @@ hr {
     cursor: pointer;
 }
 
-.image-add {
-    height: 100px;
-    width: 100px;
-    background-color: #cbd2d7;;
-    border: 2px dashed white;
-    text-align: center;
+#main-image-div:hover > span {
+    display: inline;
+}
+
+#existing-main-image-div:hover > span {
+    display: inline;
 }
 
 .image-add {
@@ -322,6 +322,10 @@ hr {
     background-color: #cbd2d7;;
     border: 2px dashed white;
     text-align: center;
+}
+
+.image-view:hover > span {
+    display: initial;
 }
 
 .image-view img {
@@ -356,4 +360,8 @@ hr {
 
 .margin-top-10 {
     margin-top: 10px;
+}
+
+.margin-bot-10 {
+    margin-bottom: 10px;
 }

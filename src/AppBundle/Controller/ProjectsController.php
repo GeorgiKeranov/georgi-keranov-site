@@ -101,13 +101,20 @@ class ProjectsController extends Controller
     /**
      * @Route("/admin/project/edit/{name}", name="project_edit")
      */
-    public function editProjectAction(Project $project) {
+    public function editProjectAction(Request $request, Project $project) {
 
         $form = $this->createForm(ProjectType::class)->setData($project);
 
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+        }
+
         return $this->render('admin/functions/edit-project.html.twig', [
             'form' => $form->createView(),
-            'project' => $project
+            'project' => $project,
+            'form_dump' => $form
         ]);
     }
 

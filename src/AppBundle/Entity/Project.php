@@ -101,6 +101,10 @@ class Project
      */
     private $imageFiles;
 
+    /**
+     * @var Collection|string[]
+     */
+    private $deleteImages;
 
     /**
      * Get id
@@ -297,6 +301,22 @@ class Project
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
+
+    /**
+     * @param \DateTime $dateCreated
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this->dateCreated = $dateCreated;
+    }
+
+    /**
      * @return Collection|File[]
      */
     public function getImageFiles()
@@ -313,21 +333,20 @@ class Project
     }
 
     /**
-     * @return \DateTime
+     * @return Collection|string[]
      */
-    public function getDateCreated()
+    public function getDeleteImages()
     {
-        return $this->dateCreated;
+        return $this->deleteImages;
     }
 
     /**
-     * @param \DateTime $dateCreated
+     * @param Collection|string[] $deleteImages
      */
-    public function setDateCreated($dateCreated)
+    public function setDeleteImages($deleteImages)
     {
-        $this->dateCreated = $dateCreated;
+        $this->deleteImages = $deleteImages;
     }
-
 
 }
 

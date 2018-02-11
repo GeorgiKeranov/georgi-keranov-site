@@ -18,84 +18,26 @@
                     <h5 class="text-center">Main image</h5>
 
                     <div id="main-image-div" class="main-image-add center hidden">
-                        <span id="main-image-delete" class="fa fa-remove hidden"></span>
+                        <span class="fa fa-remove hidden" onclick="deleteMainImage()"></span>
                         <img class="img-thumbnail center" src=""/>
                         {{ form_row(form.imageName, {'attr': { 'class': 'hidden'}})}}
                     </div>
-                    <div id="main-image-div-add" class="main-image-add center">
+                    <div id="main-image-div-add" class="main-image-add center" onclick="addMainImage()">
                         <span class="fa fa-plus"></span>
                     </div>
                 </div>
             </div>
 
             <div class="row form-group">
-                <div id="images" class="col">
-                    <div id="input-temp"></div>
-                    <div class="row form-group">
-                        <div class="col">
-                            <div id="image-div-1" class="image-view center hidden">
-                                <span class="fa fa-remove hidden"></span>
-                                <img class="img-thumbnail center"/>
-                                <input type="file" id="appbundle_project_imageFiles_0" name="appbundle_project[imageFiles][0]" class="hidden"/>
-                            </div>
-                            <div class="image-add center">
-                                <span class="fa fa-plus"></span>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div id="image-div-2" class="image-view center hidden">
-                                <span class="fa fa-remove hidden"></span>
-                                <img class="img-thumbnail center"/>
-                                <input type="file" id="appbundle_project_imageFiles_1" name="appbundle_project[imageFiles][1]" class="hidden"/>
+                <div class="col">
+                    <div id="images" class="row">
 
-                            </div>
-                            <div class="image-add center">
-                                <span class="fa fa-plus"></span>
-                            </div>
-                        </div>
                         <div class="col">
-                            <div id="image-div-3" class="image-view center hidden">
-                                <span class="fa fa-remove hidden"></span>
-                                <img class="img-thumbnail center"/>
-                                <input type="file" id="appbundle_project_imageFiles_2" name="appbundle_project[imageFiles][2]" class="hidden"/>
-                            </div>
-                            <div class="image-add center">
+                            <div class="image-add center" onclick="addNewImage()">
                                 <span class="fa fa-plus"></span>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row form-group">
-                        <div class="col">
-                            <div id="image-div-4" class="image-view center hidden">
-                                <span class="fa fa-remove hidden"></span>
-                                <img class="img-thumbnail center"/>
-                                <input type="file" id="appbundle_project_imageFiles_3" name="appbundle_project[imageFiles][3]" class="hidden"/>
-                            </div>
-                            <div class="image-add center">
-                                <span class="fa fa-plus"></span>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div id="image-div-5" class="image-view center hidden">
-                                <span class="fa fa-remove hidden"></span>
-                                <img class="img-thumbnail center"/>
-                                <input type="file" id="appbundle_project_imageFiles_4" name="appbundle_project[imageFiles][4]" class="hidden"/>
-                            </div>
-                            <div class="image-add center">
-                                <span class="fa fa-plus"></span>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div id="image-div-6" class="image-view center hidden">
-                                <span class="fa fa-remove hidden"></span>
-                                <img class="img-thumbnail center"/>
-                                <input type="file" id="appbundle_project_imageFiles_5" name="appbundle_project[imageFiles][5]" class="hidden"/>
-                            </div>
-                            <div class="image-add center">
-                                <span class="fa fa-plus"></span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -155,5 +97,6 @@
 
 
 {% block javascripts %}
-    <script src="{{ asset('js/images.js') }}"></script>
+    <script src="{{ asset('js/main-image-functions.js') }}"></script>
+    <script src="{{ asset('js/secondary-images-functions.js') }}"></script>
 {% endblock %}
