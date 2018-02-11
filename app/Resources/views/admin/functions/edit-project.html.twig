@@ -2,8 +2,6 @@
 
 {% block body %}
 
-    {{ dump(form_dump) }}
-
     <div class="container margin-top-50">
 
         <h2 class="text-center">Edit Project</h2>
@@ -22,7 +20,7 @@
                         <div id="main-image-div" class="main-image-add center {% if not project.imageName %}hidden{% endif %}">
                             <span class="fa fa-remove hidden" onclick="deleteMainImage()"></span>
                             <img class="img-thumbnail center" src="{% if project.imageName %}../../../../uploads/images/{{ project.imageName }}{% endif %}"/>
-                            {{ form_row(form.imageName, {'attr': {'class': 'hidden'} } )}}
+                            {{ form_row(form.mainImage, {'attr': {'class': 'hidden'} } )}}
                         </div>
 
                         <div id="main-image-div-add" class="main-image-add center {% if project.imageName %}hidden{% endif %}" onclick="addMainImage()">

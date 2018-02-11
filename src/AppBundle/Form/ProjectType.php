@@ -21,7 +21,7 @@ class ProjectType extends AbstractType
         $builder
             ->add('name')
             ->add('description', TextareaType::class)
-            ->add('imageName', FileType::class, [
+            ->add('mainImage', FileType::class, [
                 'data_class' => null,
                 'required' => false,
                 'label' => false,
@@ -46,6 +46,13 @@ class ProjectType extends AbstractType
             ->add('deleteImages', CollectionType::class, [
                 'entry_type' => TextType::class,
                 'allow_add' => true,
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'class' => 'hidden'
+                ]
+            ])
+            ->add('deleteMainImage', CheckboxType::class, [
                 'label' => false,
                 'required' => false,
                 'attr' => [

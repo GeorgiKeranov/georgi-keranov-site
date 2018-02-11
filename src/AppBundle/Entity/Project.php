@@ -39,11 +39,9 @@ class Project
     private $description;
 
     /**
-     * @var string|File
+     * @var string
      *
      * @ORM\Column(name="image_name", type="string", length=255, nullable=true, unique=true)
-     *
-     * @Assert\File(mimeTypes={ "image/*" })
      */
     private $imageName;
 
@@ -97,6 +95,11 @@ class Project
     private $dateCreated;
 
     /**
+     * @var File
+     */
+    private $mainImage;
+
+    /**
      * @var Collection|File[]
      */
     private $imageFiles;
@@ -105,6 +108,12 @@ class Project
      * @var Collection|string[]
      */
     private $deleteImages;
+
+    /**
+     * @var bool
+     */
+    private $deleteMainImage;
+
 
     /**
      * Get id
@@ -167,7 +176,7 @@ class Project
     /**
      * Set imageName
      *
-     * @param string|File $imageName
+     * @param string $imageName
      *
      * @return Project
      */
@@ -181,7 +190,7 @@ class Project
     /**
      * Get imageName
      *
-     * @return string|File
+     * @return string
      */
     public function getImageName()
     {
@@ -348,5 +357,38 @@ class Project
         $this->deleteImages = $deleteImages;
     }
 
+    /**
+     * @return File
+     */
+    public function getMainImage()
+    {
+        return $this->mainImage;
+    }
+
+    /**
+     * @param File $mainImage
+     */
+    public function setMainImage($mainImage)
+    {
+        $this->mainImage = $mainImage;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDeleteMainImage()
+    {
+        return $this->deleteMainImage;
+    }
+
+    /**
+     * @param bool $deleteMainImage
+     */
+    public function setDeleteMainImage($deleteMainImage)
+    {
+        $this->deleteMainImage = $deleteMainImage;
+    }
+
+    
 }
 

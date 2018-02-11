@@ -1,5 +1,5 @@
 // When the input file is changed.
-$('#appbundle_project_imageName')[0].onchange = function (evt) {
+$('#appbundle_project_mainImage')[0].onchange = function (evt) {
 
     var tgt = evt.target || window.event.srcElement, files = tgt.files;
 
@@ -21,7 +21,7 @@ $('#appbundle_project_imageName')[0].onchange = function (evt) {
 
 // Clicking the input for main image.
 function addMainImage() {
-    $('#appbundle_project_imageName').click();
+    $('#appbundle_project_mainImage')[0].click();
 }
 
 function deleteMainImage() {
@@ -35,4 +35,6 @@ function deleteMainImage() {
 
     // Showing main-image-div-add
     $('#main-image-div-add').removeClass('hidden');
+
+    $('#appbundle_project_deleteMainImage').prop('checked', true);
 }

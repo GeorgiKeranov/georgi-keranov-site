@@ -14,6 +14,22 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class ProjectsController extends Controller
 {
+
+    private function deleteImageByName($name) {
+        //$path = $this->container->getParameter('images_save_path');
+        unlink('uploads/images/' . $name);
+    }
+
+    private function saveImage(File $imageFile) {
+        // Creating unique name for the image.
+        $imageName = md5(uniqid()) . '.' . $imageFile->guessExtension();
+        // Saving the image in local directory.
+        $imageFile->move('uploads/images', $imageName);
+
+        // Returning the new name for the image.
+        return $imageName;
+    }
+
     /**
      * @Route("/projects", name="projects")
      */
@@ -47,16 +63,9 @@ class ProjectsController extends Controller
         if($form->isSubmitted() && $form->isValid()) {
             // Saving the main image to local storage and
             // name of it in the database.
-            if($project->getImageName() != null) {
-                $imageFile = $project->getImageName();
-                // Creating unique name for the image.
-                $imageName = md5(uniqid()) . '.' . $imageFile->guessExtension();
-
-                // Saving the image in local directory.
-                $imageFile->move('uploads/images', $imageName);
-
+            if($project->getMainImage() != null) {
                 // Setting the new name of the image in our project
-                $project->setImageName($imageName);
+                $project->setImageName($project->getMainImage());
             } else {
                 $project->setImageName(null);
             }
@@ -70,13 +79,8 @@ class ProjectsController extends Controller
                 // and creating Image object with the new name of the image
                 // and adding it to all images.
                 foreach($project->getImageFiles() as $imageFile) {
-                    // Creating unique name for the image.
-                    $imageName = md5(uniqid()) . '.' . $imageFile->guessExtension();
-                    // Saving the image in local directory.
-                    $imageFile->move('uploads/images', $imageName);
-
                     $image = new Image();
-                    $image->setName($imageName);
+                    $image->setName($this->saveImage($imageFile));
                     $image->setProject($project);
                     $images[] = $image;
                 }
@@ -109,12 +113,66 @@ class ProjectsController extends Controller
 
         if($form->isSubmitted() && $form->isValid()) {
 
+            $em = $this->getDoctrine()->getManager();
+
+            // Deleting the old image if deleteMainImage is true
+            if($project->isDeleteMainImage()) {
+                // Deleting the image from local storage.
+                $this->deleteImageByName($project->getImageName());
+                $project->setImageName(null);
+            }
+
+            // Save the new image.
+            if($project->getMainImage()) {
+                // Saving the new image in local storage and
+                // setting the new name of image in project.
+                $project->setImageName($this->saveImage($project->getMainImage()));
+            }
+
+            // Deleting old secondary images.
+            if($project->getDeleteImages()) {
+
+                $imageRepo = $this->getDoctrine()
+                    ->getRepository(Image::class);
+
+                foreach($project->getDeleteImages() as $imageName) {
+                    $image = $imageRepo->findOneBy([
+                        'name' => $imageName,
+                        'project' => $project
+                    ]);
+
+                    // If there is image with these params in the database.
+                    if($image) {
+                        // Delete image from database images.
+                        $em->remove($image);
+                        // Delete image from local storage.
+                        $this->deleteImageByName($image->getName());
+                    }
+                }
+            }
+
+            // If there are image files save them.
+            if($project->getImageFiles()) {
+
+                // Saving the image file in the local directory
+                // and creating Image object with the new name of the image
+                // and adding it to database.
+                foreach($project->getImageFiles() as $imageFile) {
+                    $image = new Image();
+                    $image->setName($this->saveImage($imageFile));
+                    $image->setProject($project);
+                    $em->persist($image);
+                }
+            }
+
+            $em->flush();
+
+            return $this->redirectToRoute('admin_projects');
         }
 
         return $this->render('admin/functions/edit-project.html.twig', [
             'form' => $form->createView(),
-            'project' => $project,
-            'form_dump' => $form
+            'project' => $project
         ]);
     }
 
@@ -131,15 +189,17 @@ class ProjectsController extends Controller
 
         // Deleting images that are saved in the local storage.
         $images = $project->getImages();
+        $pathToImages = $this->container->getParameter('images_save_path');
+
         if($images) {
             foreach($images as $image) {
-                unlink("../web/uploads/images/" . $image->getName());
+                unlink($pathToImages . $image->getName());
             }
         }
 
         $mainImage = $project->getimageName();
         if($mainImage) {
-            unlink("../web/uploads/images/" . $mainImage);
+            unlink($pathToImages . $mainImage);
         }
 
         // Deleting project and related fields.
@@ -149,4 +209,8 @@ class ProjectsController extends Controller
 
         return $this->redirectToRoute('admin_projects');
     }
+
+
+
+
 }
