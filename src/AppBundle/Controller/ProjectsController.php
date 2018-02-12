@@ -48,7 +48,7 @@ class ProjectsController extends Controller
      */
     public function viewProjectAction(Project $project) {
 
-        return $this->render('projects/project.html.twig', ['project' => $project]);
+        return $this->render('projects/project-view.html.twig', ['project' => $project]);
     }
 
     /**
@@ -99,7 +99,7 @@ class ProjectsController extends Controller
             return $this->redirectToRoute('admin_projects');
         }
 
-        return $this->render('admin/functions/add-project.html.twig', ["form" => $form->createView()] );
+        return $this->render('admin/functions/project-add.html.twig', ["form" => $form->createView()] );
     }
 
     /**
@@ -170,7 +170,7 @@ class ProjectsController extends Controller
             return $this->redirectToRoute('admin_projects');
         }
 
-        return $this->render('admin/functions/edit-project.html.twig', [
+        return $this->render('admin/functions/project-edit.html.twig', [
             'form' => $form->createView(),
             'project' => $project
         ]);

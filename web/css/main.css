@@ -22,7 +22,11 @@ hr {
 }
 
 .margin-bot-20 {
-    margin-bottom: 100px;
+    margin-bottom: 20px;
+}
+
+.margin-bot-50 {
+    margin-bottom: 50px;
 }
 
 .margin-left-20 {
