@@ -365,3 +365,15 @@ hr {
 .margin-bot-10 {
     margin-bottom: 10px;
 }
+
+.purple {
+    background-color: purple;
+}
+
+.green {
+    background-color: forestgreen;
+}
+
+.orange {
+    background-color: orange;
+}
