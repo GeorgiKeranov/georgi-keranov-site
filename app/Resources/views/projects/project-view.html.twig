@@ -7,6 +7,93 @@
         <h2 class="text-center">{{ project.name }}</h2>
         <hr/>
 
+        <div class="row">
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col">
+                    <div class="big-image-container">
+                        {% if project.imageName %}
+                            <img class="big-project-image"
+                                 id="big-project-image"
+                                 src="{{ asset('/uploads/images/') ~ project.imageName }}"
+                                 data-selected="0"
+                                 onclick="nextImage()"/>
+                        {% endif %}
+
+                        {% if not project.imageName %}
+                            <img class="big-project-image"
+                                 id="big-project-image"
+                                 src="{{ asset('img/no-image-available.png') }}"
+                                 data-selected="0"
+                                 onclick="nextImage()"/>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                {% if project.imageName %}
+                <div class="col-md-3">
+                    <img class="small-project-image"
+                         id="project-image-0"
+                         src="{{ asset('/uploads/images/') ~ project.imageName }}"
+                         onclick="setImage(0)"/>
+                </div>
+                {% endif %}
+
+                {% for image in project.images %}
+                <div class="col-md-3">
+                    <img class="small-project-image"
+                         id="project-image-{{ loop.index }}"
+                         src="{{ asset('/uploads/images/') ~ image.name }}"
+                         onclick="setImage({{ loop.index }})"/>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-md-7">
+
+            <div class="row">
+                <div class="col-5">
+                    Programming languages written:
+                </div>
+                <div class="col-7">
+                    <h5>{{ project.programmingLanguages }}</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-5">
+                    Technologies used:
+                </div>
+                <div class="col-7">
+                    <h5>{{ project.technologiesUsed }}</h5>
+                </div>
+            </div>
+
+            <div class="row margin-top-10">
+                <div class="col">
+                    <div class="description">
+                        {{ project.description }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row margin-top-10">
+                <div class="col">
+                    <i class="fa fa-youtube-play"></i>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/change-main-picture.js') }}"></script>
 {% endblock %}

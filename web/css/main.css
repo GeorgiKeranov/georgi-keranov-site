@@ -381,3 +381,42 @@ hr {
 .orange {
     background-color: orange;
 }
+
+.big-image-container {
+    display: table-cell;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 450px;
+    height: 250px;
+    background-color: #EFEFEF;
+    border-radius: 5px;
+}
+
+.big-project-image {
+    padding: 10px;
+    max-width: 450px;
+    max-height: 250px;
+    cursor: pointer;
+}
+
+.small-project-image {
+    margin-top: 10px;
+    max-width: 90px;
+    max-height: 40px;
+    cursor: pointer;
+}
+
+.selected-project-image {
+    border: 2px solid #FF6600;
+}
+
+.description {
+    padding: 20px;
+    background-color: #FF6347;
+    border-radius: 4px;
+}
+
+.fa-youtube-play {
+    font-size: 50px;
+}
