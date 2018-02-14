@@ -2,12 +2,12 @@
 
 {% block body %}
 
-    <div class="container margin-top-10">
+<div class="container margin-top-10">
 
-        <h2 class="text-center">{{ project.name }}</h2>
-        <hr/>
+    <h2 class="text-center">{{ project.name }}</h2>
+    <hr/>
 
-        <div class="row">
+    <div class="row">
         <div class="col-md-5">
             <div class="row">
                 <div class="col">
@@ -33,21 +33,21 @@
 
             <div class="row">
                 {% if project.imageName %}
-                <div class="col-md-3">
-                    <img class="small-project-image"
-                         id="project-image-0"
-                         src="{{ asset('/uploads/images/') ~ project.imageName }}"
-                         onclick="setImage(0)"/>
-                </div>
+                    <div class="col-md-3">
+                        <img class="small-project-image"
+                             id="project-image-0"
+                             src="{{ asset('/uploads/images/') ~ project.imageName }}"
+                             onclick="setImage(0)"/>
+                    </div>
                 {% endif %}
 
                 {% for image in project.images %}
-                <div class="col-md-3">
-                    <img class="small-project-image"
-                         id="project-image-{{ loop.index }}"
-                         src="{{ asset('/uploads/images/') ~ image.name }}"
-                         onclick="setImage({{ loop.index }})"/>
-                </div>
+                    <div class="col-md-3">
+                        <img class="small-project-image"
+                             id="project-image-{{ loop.index }}"
+                             src="{{ asset('/uploads/images/') ~ image.name }}"
+                             onclick="setImage({{ loop.index }})"/>
+                    </div>
                 {% endfor %}
             </div>
         </div>
@@ -82,15 +82,39 @@
 
             <div class="row margin-top-10">
                 <div class="col">
-                    <i class="fa fa-youtube-play"></i>
+                    <div class="social-icons icon-circle">
+                        <h5>Github link:
+                            <a target="_blank" href="{{ project.githubLink }}">
+                                <i class="fa fa-github"></i>
+                            </a>
+                        </h5>
+                    </div>
+                </div>
+                <div class="col">
+                    <h5> Youtube link:
+                        <a target="_blank" href="{{ project.youtubeLink }}">
+                            <i class="fa fa-youtube-play"></i>
+                        </a>
+                    </h5>
                 </div>
             </div>
 
         </div>
-
-        </div>
-
     </div>
+
+    <hr/>
+    <div class="row margin-top-10">
+        <div class="col text-center">
+            <h3>Youtube preview of the project:</h3>
+            <iframe width="600" height="350"
+                    src="{{ project.youtubeLinkEmbed }}">
+            </iframe>
+        </div>
+    </div>
+
+    <hr/>
+
+</div>
 
 {% endblock %}
 

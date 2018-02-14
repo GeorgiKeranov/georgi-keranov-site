@@ -65,7 +65,7 @@ class ProjectsController extends Controller
             // name of it in the database.
             if($project->getMainImage() != null) {
                 // Setting the new name of the image in our project
-                $project->setImageName($project->getMainImage());
+                $project->setImageName($this->saveImage($project->getMainImage()));
             } else {
                 $project->setImageName(null);
             }

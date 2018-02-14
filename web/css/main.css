@@ -141,7 +141,10 @@ hr {
     box-shadow: 1px 1px 3px #333;
 }
 
-.social-icons .fa-github{background-color:#070709;}
+.social-icons .fa-github{
+    background-color:#070709;
+    vertical-align: middle;
+}
 .social-icons .fa-linkedin-square{background-color:#0085AE;}
 
 .form-control {
@@ -419,4 +422,6 @@ hr {
 
 .fa-youtube-play {
     font-size: 50px;
+    color: red;
+    vertical-align: middle;
 }
