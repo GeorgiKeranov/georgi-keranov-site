@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Project;
 use AppBundle\Form\ProjectType;
@@ -10,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProjectsController extends Controller
 {
@@ -210,7 +211,57 @@ class ProjectsController extends Controller
         return $this->redirectToRoute('admin_projects');
     }
 
+    /**
+     * @Route("/project/{name}/comment", name="project_comment")
+     * @Method({"POST"})
+     */
+    public function commentOnPostAction(Request $request, $name) {
 
+        $responseParams = [];
 
+        $project = $this->getDoctrine()
+            ->getRepository(Project::class)
+            ->findOneBy(['name' => $name]);
+
+        $user = $this->getUser();
+
+        $commentContent = $request->request->get('comment');
+
+        if($project != null && $user != null && $commentContent != null && $commentContent != '') {
+
+            $comment = new Comment();
+            $comment->setProject($project);
+            $comment->setUser($user);
+            $comment->setComment($commentContent);
+            $comment->setCreated(new \DateTime());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+
+            $responseParams = [
+                'error' => false,
+                'id' => $comment->getId(),
+                'comment' => $comment->getComment(),
+                'user' => [
+                    'fullName' => $user->getFirstName() . ' ' . $user->getLastName(),
+                    'profilePicture' => $user->getProfilePicture()
+                ],
+                'created' => $comment->getCreated()->format('Y-m-d H:i:s')
+            ];
+
+        }
+        else {
+            $responseParams['error'] = true;
+            $responseParams['message'] = 'Empty comment, non existing project or no user authenticated';
+        }
+
+        $response = new Response(json_encode($responseParams));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    
 
 }

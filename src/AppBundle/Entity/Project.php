@@ -84,6 +84,7 @@ class Project
      * @var Collection|Comment[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="project")
+     * @ORM\OrderBy({"created" = "DESC"})
      */
     private $comments;
 

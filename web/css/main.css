@@ -425,3 +425,17 @@ hr {
     color: red;
     vertical-align: middle;
 }
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.gray div, p{
+    color: #919aa1 !important;
+}
+
+.profile-pic-comment {
+    height: 100px;
+    max-width: 100%;
+    border-radius: 100%;
+}

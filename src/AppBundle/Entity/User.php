@@ -60,6 +60,13 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="profile_picture", type="string", length=255, nullable=true)
+     */
+    private $profilePicture;
+
+    /**
      * @var Collection|Role[]
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role")
@@ -210,6 +217,22 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return string
+     */
+    public function getProfilePicture()
+    {
+        return $this->profilePicture;
+    }
+
+    /**
+     * @param string $profilePicture
+     */
+    public function setProfilePicture($profilePicture)
+    {
+        $this->profilePicture = $profilePicture;
+    }
+
+    /**
      * @param Role[]|Collection $roles
      */
     public function setRoles($roles)
@@ -241,6 +264,10 @@ class User implements UserInterface, \Serializable
         }
 
         return $roles_names;
+    }
+
+    public function getFullName() {
+        return $this->firstName . ' ' . $this->lastName;
     }
 
     /**
