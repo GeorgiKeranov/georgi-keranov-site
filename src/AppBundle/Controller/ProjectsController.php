@@ -262,6 +262,93 @@ class ProjectsController extends Controller
         return $response;
     }
 
-    
+    /**
+     * @Route("/comment/{id}/edit", name="project_comment_edit")
+     * @Method({"POST"})
+     */
+    public function editCommentOnPostAction(Request $request, $id) {
 
+        $responseParams = [];
+
+        $comment = $this->getDoctrine()
+            ->getRepository(Comment::class)
+            ->findOneBy(['id' => $id]);
+
+        $user = $this->getUser();
+
+        if($user != null && $comment != null) {
+
+            // Checking if comment belongs to user.
+            if($comment->getUser() == $user) {
+
+                $comment->setComment($request->request->get('comment'));
+                $comment->setUpdated(new \DateTime());
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($comment);
+                $em->flush();
+
+                $responseParams = [
+                    'error' => false,
+                    'id' => $comment->getId(),
+                    'comment' => $comment->getComment(),
+                    'updated' => $comment->getUpdated()->format('Y-m-d H:i')
+                ];
+            }
+
+            else {
+                $responseParams['error'] = true;
+                $responseParams['message'] = 'That comment is not yours.';
+            }
+
+        }
+        else {
+            $responseParams['error'] = true;
+            $responseParams['message'] = 'Empty comment or not authenticated user.';
+        }
+
+        $response = new Response(json_encode($responseParams));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/comment/{id}/delete", name="project_comment_delete")
+     * @Method({"POST"})
+     */
+    public function deleteCommentOnPostAction($id) {
+
+        $responseParams = [ 'error' => false ];
+
+        $comment = $this->getDoctrine()
+            ->getRepository(Comment::class)
+            ->findOneBy(['id' => $id]);
+
+        if($comment != null) {
+
+            if(!$comment->getUser() == $this->getUser()) {
+                $responseParams = [
+                    'error' => true,
+                    'message' => 'Comment is not yours'
+                ];
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($comment);
+            $em->flush();
+        }
+
+        else {
+            $responseParams = [
+               'error' => true,
+               'message' => 'Comment is not existing'
+            ];
+        }
+
+        $response = new Response(json_encode($responseParams));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
 }

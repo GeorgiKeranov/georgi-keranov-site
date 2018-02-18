@@ -104,19 +104,6 @@
 
     <hr/>
 
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-10">
-                <textarea class="form-control" type="text" id="new-comment"
-                          placeholder="Add new comment"></textarea>
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-outline-success" onclick="comment()">Comment</button>
-            </div>
-        </div>
-        <hr/>
-    </div>
-
     <div class="row">
         <div class="col">
             <h3 class="text-center">
@@ -130,10 +117,27 @@
 
     <hr/>
 
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-10">
+                <textarea class="form-control" type="text" id="new-comment"
+                          placeholder="Add new comment"></textarea>
+            </div>
+            <div class="col-md-2">
+                {% if app.user %}
+                    <button class="btn btn-outline-success" onclick="comment()">Comment</button>
+                {% else %}
+                    <a class="btn btn-outline-success" href="{{ path('login') }}">Comment</a>
+                {% endif %}
+            </div>
+        </div>
+        <hr/>
+    </div>
+
     <div id="new-comments-ajax"></div>
 
     {% for comment in project.comments %}
-    <div class="row margin-top-10">
+    <div id="comment-{{ comment.id }}" class="row margin-top-10">
         <div class="col-md">
             <div class="row gray">
 
@@ -150,10 +154,16 @@
                 </div>
 
                 <div class="col-md-10">
-                    <div class="card border-secondary mb-3" style="width: 100%">
+                    <div id="comment-details-{{ comment.id }}" class="card border-secondary mb-3" style="width: 100%">
                         <div class="card-header">
-                            <span class="float-left">{{ comment.user.fullName }}</span>
-                            <span class="float-right">{{ comment.created|date("Y-m-d H:i:s") }}</span>
+                            <span class="float-left" >{{ comment.user.fullName }} commented on {{ comment.created|date("Y-m-d H:i") }}</span>
+                            {% if app.user %}
+                                {% if app.user.username == comment.user.username %}
+                                <span class="float-right">
+                                    <i class="fa fa-edit edit-comment" onclick="showEditComment({{ comment.id }})"></i> <i class="fa fa-remove delete-comment" onclick="deleteComment({{ comment.id }})"></i>
+                                </span>
+                                {% endif %}
+                            {% endif %}
                         </div>
                         <div class="card-body">
                             <p class="card-text">{{ comment.comment }}</p>

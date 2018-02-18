@@ -207,11 +207,7 @@ class Project
      */
     public function setYoutubeLink($youtubeLink)
     {
-        // Extracting the id of the youtube link
-        // Example: https://www.youtube.com/watch?v=keh-V_DP0y8
-        // We are getting only the "keh-V_DP0y8" part and setting it
-        // to the youtube link.
-        $this->youtubeLink = explode("v=", $youtubeLink)[1];
+        $this->youtubeLink = $youtubeLink;
 
         return $this;
     }
@@ -223,18 +219,7 @@ class Project
      */
     public function getYoutubeLink()
     {
-        // Adding "https://www.youtube.com/watch?v=" to the front of the youtube link.
-        return "https://www.youtube.com/watch?v=" . $this->youtubeLink;
-    }
-
-    /**
-     * Get youtubeLinkEmbed
-     *
-     * @return string
-     */
-    public function getYoutubeLinkEmbed() {
-        // Adding "https://www.youtube.com/embed/" to the front of the youtube link.
-        return "https://www.youtube.com/embed/" . $this->youtubeLink;
+        return $this->youtubeLink;
     }
 
     /**

@@ -439,3 +439,16 @@ hr {
     max-width: 100%;
     border-radius: 100%;
 }
+
+.edit-comment {
+    color: orange;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.delete-comment {
+    color: red;
+    font-size: 25px;
+    cursor: pointer;
+}
