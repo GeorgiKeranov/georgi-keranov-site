@@ -66,12 +66,5 @@ class UserController extends Controller
     public function accountSettingsAction() {
         return $this->render("user/account.html.twig");
     }
-
-    /**
-     * @Route("/messages", name="user_messages")
-     */
-    public function userMessagesAction() {
-        return $this->render("user/messages.html.twig");
-    }
 }
 
