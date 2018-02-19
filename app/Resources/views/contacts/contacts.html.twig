@@ -42,35 +42,34 @@
 
             <div class="col margin-top-50">
 
-                <form>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col">
-                                <label>Name:</label>
-                                <input type="text" placeholder="Name" name="name" class="form-control"/>
-                            </div>
-                            <div class="col">
-                                <label class="text-center">Email:</label>
-                                <input type="email" placeholder="Email" name="email" class="form-control"/>
-                            </div>
-                            <div class="col">
-                                <label class="text-center">Phone:   </label>
-                                <input type="text" placeholder="Phone" name="phone" class="form-control"/>
-                            </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label>Name:</label>
+                            <input type="text" placeholder="Name" id="name" class="form-control"/>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <textarea placeholder="Message" name="message" class="form-control textarea"></textarea>
-                            </div>
+                        <div class="col">
+                            <label class="text-center">Email:</label>
+                            <input type="email" placeholder="Email" id="email" class="form-control"/>
                         </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <input type="submit" class="btn btn-outline-success btn-block" value="Send">
-                            </div>
+                        <div class="col">
+                            <label class="text-center">Phone:   </label>
+                            <input type="text" placeholder="Phone" id="phone" class="form-control"/>
                         </div>
                     </div>
-                </form>
+                    <div class="row">
+                        <div class="col">
+                            <textarea placeholder="Message" id="message" class="form-control textarea"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-outline-success btn-block" onclick="sendMessage()">Send</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -81,4 +80,8 @@
            margin-top: 10px;
         }
     </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/send-message.js') }}"></script>
 {% endblock %}
