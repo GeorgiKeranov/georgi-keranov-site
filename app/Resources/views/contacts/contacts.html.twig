@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="container">
 
@@ -46,15 +50,17 @@
                     <div class="row">
                         <div class="col">
                             <label>Name:</label>
-                            <input type="text" placeholder="Name" id="name" class="form-control"/>
+                            <input type="text" placeholder="Name" id="name" class="form-control"
+                                   value="{% if app.user %}{{ app.user.firstName }} {{ app.user.lastName }}{% endif %}"/>
                         </div>
                         <div class="col">
-                            <label class="text-center">Email:</label>
-                            <input type="email" placeholder="Email" id="email" class="form-control"/>
+                            <label>Email:</label>
+                            <input type="email" placeholder="Email" id="email" class="form-control"
+                                   value="{% if app.user %}{{ app.user.email }}{% endif %}"/>
                         </div>
                         <div class="col">
-                            <label class="text-center">Phone:   </label>
-                            <input type="text" placeholder="Phone" id="phone" class="form-control"/>
+                            <label>Phone:</label>
+                            <input type="text" placeholder="Not required" id="phone" class="form-control"/>
                         </div>
                     </div>
                     <div class="row">
@@ -75,6 +81,7 @@
         </div>
     </div>
 
+
     <style>
         .row {
            margin-top: 10px;
@@ -83,5 +90,6 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('js/send-message.js') }}"></script>
 {% endblock %}

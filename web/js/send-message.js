@@ -12,11 +12,26 @@ function sendMessage() {
         processData: false,
         contentType: false,
         type: 'POST',
-        success: function() {
-            $('#name').val('');
-            $('#email').val('');
-            $('#phone').val('');
-            $('#message').val('');
+        success: function(data) {
+
+            // No error from the server.
+            if(!data['error']) {
+
+                $('#name').val('');
+                $('#email').val('');
+                $('#phone').val('');
+                $('#message').val('');
+
+                swal('Success', 'Your message was sent!', 'success');
+            }
+
+            // Error from the server.
+            else {
+                swal('Error', data['message'], 'error');
+            }
+        },
+        error: function() {
+            swal('Error', 'Server error, try sending message later.', 'warning');
         }
     });
 }

@@ -16,12 +16,14 @@ use Symfony\Component\HttpFoundation\Response;
 class ProjectsController extends Controller
 {
 
-    private function deleteImageByName($name) {
+    private function deleteImageByName($name)
+    {
         //$path = $this->container->getParameter('images_save_path');
         unlink('uploads/images/' . $name);
     }
 
-    private function saveImage(File $imageFile) {
+    private function saveImage(File $imageFile)
+    {
         // Creating unique name for the image.
         $imageName = md5(uniqid()) . '.' . $imageFile->guessExtension();
         // Saving the image in local directory.
@@ -47,7 +49,8 @@ class ProjectsController extends Controller
     /**
      * @Route("/project/{name}", name="project_view")
      */
-    public function viewProjectAction(Project $project) {
+    public function viewProjectAction(Project $project)
+    {
 
         return $this->render('projects/project-view.html.twig', ['project' => $project]);
     }
@@ -55,7 +58,8 @@ class ProjectsController extends Controller
     /**
      * @Route("/admin/project/add", name="project_add")
      */
-    public function addProjectAction(Request $request) {
+    public function addProjectAction(Request $request)
+    {
 
         $project = new Project();
         $form = $this->createForm(ProjectType::class, $project);
@@ -106,7 +110,8 @@ class ProjectsController extends Controller
     /**
      * @Route("/admin/project/edit/{name}", name="project_edit")
      */
-    public function editProjectAction(Request $request, Project $project) {
+    public function editProjectAction(Request $request, Project $project)
+    {
 
         $form = $this->createForm(ProjectType::class)->setData($project);
 
@@ -181,7 +186,8 @@ class ProjectsController extends Controller
      * @Route("/admin/project/remove/{name}", name="project_remove")
      * @Method({"POST"})
      */
-    public function deleteProjectAction($name) {
+    public function deleteProjectAction($name)
+    {
 
         // Finding the project for deleting by name.
         $project = $this->getDoctrine()
@@ -215,7 +221,8 @@ class ProjectsController extends Controller
      * @Route("/project/{name}/comment", name="project_comment")
      * @Method({"POST"})
      */
-    public function commentOnPostAction(Request $request, $name) {
+    public function commentOnPostAction(Request $request, $name)
+    {
 
         $responseParams = [];
 
@@ -266,7 +273,8 @@ class ProjectsController extends Controller
      * @Route("/comment/{id}/edit", name="project_comment_edit")
      * @Method({"POST"})
      */
-    public function editCommentOnPostAction(Request $request, $id) {
+    public function editCommentOnPostAction(Request $request, $id)
+    {
 
         $responseParams = [];
 
@@ -317,7 +325,8 @@ class ProjectsController extends Controller
      * @Route("/comment/{id}/delete", name="project_comment_delete")
      * @Method({"POST"})
      */
-    public function deleteCommentOnPostAction($id) {
+    public function deleteCommentOnPostAction($id)
+    {
 
         $responseParams = [ 'error' => false ];
 

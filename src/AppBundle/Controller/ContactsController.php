@@ -24,7 +24,8 @@ class ContactsController extends Controller
      * @Route("/contacts/message", name="send_message")
      * @Method({"POST"})
      */
-    public function sendMessageAction(Request $request) {
+    public function sendMessageAction(Request $request)
+    {
 
         $message = new Message();
         $message->setName($request->request->get('name'));
@@ -32,13 +33,23 @@ class ContactsController extends Controller
         $message->setPhone($request->request->get('phone'));
         $message->setMessage($request->request->get('message'));
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($message);
-        $em->flush();
+        if($message->isValid()) {
 
-        $responseParams = [
-            'error' => false
-        ];
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($message);
+            $em->flush();
+
+            $responseParams = [
+                'error' => false
+            ];
+        }
+
+        else {
+            $responseParams = [
+                'error' => true,
+                'message' => 'Some of fields -> name/email/message are empty'
+            ];
+        }
 
         $response = new Response(json_encode($responseParams));
         $response->headers->set('Content-Type', 'application/json');
