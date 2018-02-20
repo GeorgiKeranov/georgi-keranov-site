@@ -4,6 +4,7 @@ function sendMessage() {
     fd.append('name', $('#name').val());
     fd.append('email', $('#email').val());
     fd.append('phone', $('#phone').val());
+    fd.append('title', $('#title').val());
     fd.append('message', $('#message').val());
 
     $.ajax({
@@ -17,9 +18,7 @@ function sendMessage() {
             // No error from the server.
             if(!data['error']) {
 
-                $('#name').val('');
-                $('#email').val('');
-                $('#phone').val('');
+                $('#title').val('');
                 $('#message').val('');
 
                 swal('Success', 'Your message was sent!', 'success');

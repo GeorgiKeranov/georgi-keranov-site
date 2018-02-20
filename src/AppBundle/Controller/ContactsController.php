@@ -33,6 +33,7 @@ class ContactsController extends Controller
         $message->setPhone($request->request->get('phone'));
         $message->setTitle($request->request->get('title'));
         $message->setMessage($request->request->get('message'));
+        $message->setDateSent(new \DateTime());
 
         if($message->isValid()) {
 

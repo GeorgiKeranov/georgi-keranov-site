@@ -56,6 +56,13 @@ class Message
      */
     private $message;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_sent", type="datetime")
+     */
+    private $dateSent;
+
 
     /**
      * Get id
@@ -177,6 +184,22 @@ class Message
     public function getMessage()
     {
         return $this->message;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateSent()
+    {
+        return $this->dateSent;
+    }
+
+    /**
+     * @param \DateTime $dateSent
+     */
+    public function setDateSent($dateSent)
+    {
+        $this->dateSent = $dateSent;
     }
 
     /**

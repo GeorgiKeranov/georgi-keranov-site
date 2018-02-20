@@ -1,103 +1,50 @@
 {% extends 'admin/admin.html.twig' %}
 
-{% block main %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}">
+{% endblock %}
 
-    <a href="#" class="btn btn-success btn-block">
-        <span class="fa fa-paper-plane"></span>
-        Send new message
-    </a>
+{% block main %}
 
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>Options</th>
-            <th>Picture</th>
-            <th>User</th>
+            <th>Author's name</th>
             <th>Title</th>
             <th>Date</th>
+            <th class="text-center">Options</th>
         </tr>
         </thead>
         <tbody>
-        <tr class="table-warning">
+
+        {% for message in messages %}
+        <tr id="message-{{ message.id }}" class="table-warning">
+            <td>{{ message.name }}</td>
             <td>
-                <a href="#" class="btn btn-primary">
-                    <span class="fa fa-reply"></span>
-                </a>
-                <a href="#" class="btn btn-danger">
+                {% if message.title %}
+                    {{ message.title }}
+                {% else %}
+                    [ EMPTY TITLE ]
+                {% endif %}
+            </td>
+            <td>{{ message.dateSent|date('H:i, d F Y') }}</td>
+            <td class="text-center">
+                <button class="btn btn-success"
+                        onclick="document.location = '{{ path('admin_message', {'id': message.id}) }}'">
+                    <span class="fa fa-eye"></span>
+                </button>
+                <button class="btn btn-danger" onclick="deleteMessage({{ message.id }})">
                     <span class="fa fa-trash"></span>
-                </a>
+                </button>
             </td>
-            <td>
-                <img class="img-user-table" src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"/>
-            </td>
-            <td>Georgi Keranov</td>
-            <td>Your project is super cool</td>
-            <td>2018/01/02</td>
         </tr>
-        <tr class="table-warning">
-            <td>
-                <a href="#" class="btn btn-primary">
-                    <span class="fa fa-reply"></span>
-                </a>
-                <a href="#" class="btn btn-danger">
-                    <span class="fa fa-trash"></span>
-                </a>
-            </td>
-            <td>
-                <img class="img-user-table" src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"/>
-            </td>
-            <td>Georgi Keranov</td>
-            <td>Your project is super cool</td>
-            <td>2018/01/02</td>
-        </tr>
-        <tr class="table-warning">
-            <td>
-                <a href="#" class="btn btn-primary">
-                    <span class="fa fa-reply"></span>
-                </a>
-                <a href="#" class="btn btn-danger">
-                    <span class="fa fa-trash"></span>
-                </a>
-            </td>
-            <td>
-                <img class="img-user-table" src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"/>
-            </td>
-            <td>Georgi Keranov</td>
-            <td>Your project is super cool</td>
-            <td>2018/01/02</td>
-        </tr>
-        <tr class="table-warning">
-            <td>
-                <a href="#" class="btn btn-primary">
-                    <span class="fa fa-reply"></span>
-                </a>
-                <a href="#" class="btn btn-danger">
-                    <span class="fa fa-trash"></span>
-                </a>
-            </td>
-            <td>
-                <img class="img-user-table" src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"/>
-            </td>
-            <td>Georgi Keranov</td>
-            <td>Your project is super cool</td>
-            <td>2018/01/02</td>
-        </tr><tr class="table-warning">
-            <td>
-                <a href="#" class="btn btn-primary">
-                    <span class="fa fa-reply"></span>
-                </a>
-                <a href="#" class="btn btn-danger">
-                    <span class="fa fa-trash"></span>
-                </a>
-            </td>
-            <td>
-                <img class="img-user-table" src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"/>
-            </td>
-            <td>Georgi Keranov</td>
-            <td>Your project is super cool</td>
-            <td>2018/01/02</td>
-        </tr>
+        {% endfor %}
 
         </tbody>
     </table>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/message-delete.js') }}"></script>
 {% endblock %}

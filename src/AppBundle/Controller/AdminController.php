@@ -3,11 +3,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Image;
+use AppBundle\Entity\Message;
 use AppBundle\Entity\Project;
 use AppBundle\Form\ProjectType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends Controller
 {
@@ -33,8 +36,65 @@ class AdminController extends Controller
      */
     public function messagesAction()
     {
-        return $this->render('admin/messages.html.twig');
+        $allMessages = $this
+            ->getDoctrine()
+            ->getRepository(Message::class)
+            ->findBy([], ['dateSent' => 'DESC']);
+
+        return $this->render('admin/messages.html.twig', ['messages' => $allMessages]);
     }
+
+    /**
+     * @Route("/admin/messages/{id}", name="admin_message")
+     */
+    public function readMessageAction($id) {
+
+        $message = $this->getDoctrine()
+            ->getManager()->find(Message::class, $id);
+
+        if($message == null) {
+            $this->redirectToRoute('admin_messages');
+        }
+
+        return $this->render('admin/functions/message-read.html.twig', [
+            'message' => $message
+        ]);
+    }
+
+    /**
+     * @Route("/admin/messages/{id}/delete", name="admin_message_delete")
+     *
+     * @Method({"POST"})
+     */
+    public function deleteMessageAction($id) {
+
+        $responseParams = [ 'error' => false ];
+
+        $em = $this->getDoctrine()->getManager();
+
+        $message = $em->find(Message::class, $id);
+
+        // If message is not existing.
+        if(!$message) {
+            $responseParams = [
+                'error' => true,
+                'message' => 'Message with this id is not existing'
+            ];
+        }
+
+        // If message is existing.
+        else {
+            // Deleting message from database.
+            $em->remove($message);
+            $em->flush();
+        }
+
+        $response = new Response(json_encode($responseParams));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
 
     /**
      * @Route("/admin/projects", name="admin_projects")
