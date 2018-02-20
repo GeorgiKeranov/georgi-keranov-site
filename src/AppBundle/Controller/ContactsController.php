@@ -31,6 +31,7 @@ class ContactsController extends Controller
         $message->setName($request->request->get('name'));
         $message->setEmail($request->request->get('email'));
         $message->setPhone($request->request->get('phone'));
+        $message->setTitle($request->request->get('title'));
         $message->setMessage($request->request->get('message'));
 
         if($message->isValid()) {
