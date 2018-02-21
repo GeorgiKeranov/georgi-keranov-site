@@ -68,8 +68,8 @@ function createNewCommentInDOM(data) {
 
     // Adding new comment in the dom by given data.
     var profilePicUrl = '../../';
-    if(data['profilePicture'])
-        profilePicUrl += 'uploads/images/' + data['profilePicture'];
+    if(data['user']['profilePicture'])
+        profilePicUrl += 'uploads/images/' + data['user']['profilePicture'];
     else
         profilePicUrl += 'img/no-profile-picture.png';
 
