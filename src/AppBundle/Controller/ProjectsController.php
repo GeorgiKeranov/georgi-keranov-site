@@ -253,7 +253,7 @@ class ProjectsController extends Controller
                     'fullName' => $user->getFirstName() . ' ' . $user->getLastName(),
                     'profilePicture' => $user->getProfilePicture()
                 ],
-                'created' => $comment->getCreated()->format('Y-m-d H:i:s')
+                'created' => $comment->getCreated()->format('Y-m-d H:i')
             ];
 
         }
