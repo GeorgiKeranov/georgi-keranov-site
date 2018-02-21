@@ -112,7 +112,8 @@ class UserController extends Controller
             // Check if we have new password given.
             if($newPassword = $user->getNewPassword()) {
                 // Encoding the new password
-                $encoder->encodePassword($user, $newPassword);
+                $newPassword = $encoder->encodePassword($user, $newPassword);
+                $user->setPassword($newPassword);
             }
 
             $em = $this->getDoctrine()->getManager();
@@ -122,8 +123,7 @@ class UserController extends Controller
         }
 
         return $this->render("user/account.html.twig", [
-            'form' => $form->createView(),
-            'user' => $user
+            'form' => $form->createView()
             ]);
     }
 }

@@ -22,10 +22,10 @@
                         <div class="row">
                             <div class="col">
                                 <h3>Profile picture</h3>
-                                <span id="image-delete" class="fa fa-remove {% if not user.profilePicture %}hidden{% endif %}"></span>
+                                <span id="image-delete" class="fa fa-remove {% if not app.user.profilePicture %}hidden{% endif %}"></span>
                                 <div class="image-container">
-                                    {% if user.profilePicture %}
-                                        <img id="image-img" class="img-thumbnail" src="{{ asset('uploads/images/' ~ user.profilePicture) }}"/>
+                                    {% if app.user.profilePicture %}
+                                        <img id="image-img" class="img-thumbnail" src="{{ asset('uploads/images/' ~ app.user.profilePicture) }}"/>
                                     {% else %}
                                         <img id="image-img" class="img-thumbnail" src="{{ asset('img/no-profile-picture.png') }}"/>
                                     {% endif %}
