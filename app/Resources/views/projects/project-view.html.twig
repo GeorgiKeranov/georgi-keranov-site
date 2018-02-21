@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}">
+{% endblock %}
+
 {% block body %}
 
 <div class="container margin-top-10">
@@ -180,6 +184,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/frameworks/sweetalert.min.js') }}"></script>
     <script src="{{ asset('js/project/change-main-picture.js') }}"></script>
     <script src="{{ asset('js/project/comment-ajax.js') }}"></script>
 {% endblock %}

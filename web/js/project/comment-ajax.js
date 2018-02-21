@@ -41,6 +41,12 @@ function comment() {
 
     // Lock textarea and button.
     var comment = $('#new-comment');
+
+    if(comment.val() == '') {
+        swal('Error', 'Your comment is empty!', 'error');
+        return;
+    }
+
     comment.attr('disabled', 'disabled');
     $('.btn-outline-success').attr('disabled', 'disabled');
 
@@ -58,6 +64,8 @@ function comment() {
 }
 
 function createNewCommentInDOM(data) {
+
+    swal("Sucess", "Your commented successfully this project.", 'success');
 
     // Enabling textarea and button for new comment.
     // Also removing text from the comment textarea.
@@ -127,21 +135,33 @@ function cancelEditComment(commentId) {
 }
 
 function deleteComment(commentId) {
-    $.ajax({
-        url: url + "comment/" + commentId + "/delete",
-        processData: false,
-        contentType: false,
-        type: 'POST',
-        success: function (data) {
 
-            if(data['error'])
-                console.log(data['message']);
+    swal({
+        title: "Are you sure?",
+        text: "Are you sure you want to delete this comment?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        confirmButtonColor: "#ec6c62"
+    }, function() {
 
-            if(!data['error']) {
-                $('#comment-' + commentId).remove();
-                var commentsCount = $('#project-comments')[0];
-                commentsCount.innerText = (Number(commentsCount.innerText) - 1);
+        $.ajax({
+            url: url + "comment/" + commentId + "/delete",
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+
+                if(data['error'])
+                    console.log(data['message']);
+
+                if(!data['error']) {
+                    $('#comment-' + commentId).remove();
+                    var commentsCount = $('#project-comments')[0];
+                    commentsCount.innerText = (Number(commentsCount.innerText) - 1);
+                }
             }
-        }
+        });
+
     });
 }
