@@ -18,8 +18,8 @@ class ProjectsController extends Controller
 
     private function deleteImageByName($name)
     {
-        //$path = $this->container->getParameter('images_save_path');
-        unlink('uploads/images/' . $name);
+        $path = $this->container->getParameter('images_save_path');
+        unlink($path . $name);
     }
 
     private function saveImage(File $imageFile)
@@ -200,13 +200,12 @@ class ProjectsController extends Controller
 
         if($images) {
             foreach($images as $image) {
-                unlink($pathToImages . $image->getName());
+                deleteImageByName($image->getName());
             }
         }
-
-        $mainImage = $project->getimageName();
-        if($mainImage) {
-            unlink($pathToImages . $mainImage);
+        
+        if($mainImage = $project->getimageName()) {
+            deleteImageByName($mainImage);
         }
 
         // Deleting project and related fields.

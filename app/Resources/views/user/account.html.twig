@@ -1,8 +1,19 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="container margin-top-50">
-        <form class="form-horizontal" enctype="multipart/form-data" method="post">
+
+        {% if error is defined %}
+            <div id="error" class="hidden">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        {{ form_start(form) }}
             <div class="row">
 
                 <!-- left column -->
@@ -11,13 +22,20 @@
                         <div class="row">
                             <div class="col">
                                 <h3>Profile picture</h3>
-                                <img id="profilePic" class="img-thumbnail" src="https://s3.amazonaws.com/37assets/svn/1065-IMG_2529.jpg"/>
+                                <span id="image-delete" class="fa fa-remove {% if not user.profilePicture %}hidden{% endif %}"></span>
+                                <div class="image-container">
+                                    {% if user.profilePicture %}
+                                        <img id="image-img" class="img-thumbnail" src="{{ asset('uploads/images/' ~ user.profilePicture) }}"/>
+                                    {% else %}
+                                        <img id="image-img" class="img-thumbnail" src="{{ asset('img/no-profile-picture.png') }}"/>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row margin-top-10">
                             <div class="col">
                                 <h6>Upload a different photo...</h6>
-                                <input id="picture" class="form-control" type="file" name="profilePic"/>
+                                {{ form_row(form.profilePictureFile, {'label': false, 'attr': {'class': 'form-control'}}) }}
                             </div>
                         </div>
                     </div>
@@ -29,12 +47,12 @@
                         <div class="row">
                             <div class="col">
                                 <label class="control-label">First name:</label>
-                                <input class="form-control" type="text" name="firstName"/>
+                                {{ form_row(form.firstName, {'label': false, 'attr': {'class': 'form-control'}}) }}
                             </div>
 
                             <div class="col">
                                 <label class="control-label">Last name:</label>
-                                <input class="form-control" type="text" name="lastName"/>
+                                {{ form_row(form.lastName, {'label': false, 'attr': {'class': 'form-control'}}) }}
                             </div>
                         </div>
                     </div>
@@ -43,12 +61,12 @@
                         <div class="row">
                             <div class="col">
                                 <label class="control-label">Username:</label>
-                                <input class="form-control" type="text" name="username"/>
+                                {{ form_row(form.username, {'label': false, 'attr': {'class': 'form-control'}}) }}
                             </div>
 
                             <div class="col">
                                 <label class="control-label">Email:</label>
-                                <input class="form-control" type="email" name="email"/>
+                                {{ form_row(form.email, {'label': false, 'attr': {'class': 'form-control'}}) }}
                             </div>
                         </div>
                     </div>
@@ -57,12 +75,12 @@
                         <div class="row">
                             <div class="col">
                                 <label class="control-label">New Password:</label>
-                                <input class="form-control" type="password" name="newPassword" placeholder="Not Required"/>
+                                {{ form_row(form.newPassword.first, {'label': false, 'attr': {'class': 'form-control', 'placeholder': 'Not required'}}) }}
                             </div>
 
                             <div class="col">
                                 <label class="control-label">Confirm New Password:</label>
-                                <input class="form-control" type="password" name="confirmNewPassword" placeholder="Not Required"/>
+                                {{ form_row(form.newPassword.second, {'label': false, 'attr': {'class': 'form-control', 'placeholder': 'Not required'}}) }}
                             </div>
                         </div>
 
@@ -71,17 +89,22 @@
                     <div class="form-group">
                         <div class="text-center">
                             <label class="control-label">Current Password:</label>
-                            <input class="form-control" type="password" name="curPassword" placeholder="Required"/>
+                            {{ form_row(form.confirmPassword, {'label': false, 'attr': {'class': 'form-control', 'placeholder': 'Required'}}) }}
                         </div>
                     </div>
 
                     <div class="text-center">
-                        <input class="btn btn-outline-light btn-block" value="Save Changes" type="submit"/>
+                        <div class="btn btn-outline-light btn-block" onclick="submitForm()">Save Changes</div>
                         <a class="btn btn-outline-dark btn-block" href="{{ path('homepage') }}">Cancel</a>
                     </div>
                 </div>
 
             </div>
-        </form>
+        {{ form_end(form) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/account.js') }}"></script>
 {% endblock %}

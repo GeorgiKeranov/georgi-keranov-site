@@ -452,3 +452,26 @@ hr {
     font-size: 25px;
     cursor: pointer;
 }
+
+.image-container {
+    height: 350px;
+    width: 350px;
+    background-color: #cbd2d7;
+    border: 2px dashed white;
+    text-align: center;
+    line-height: 350px;
+}
+
+#image-delete {
+    position: absolute;
+    background-color: red;
+    border-radius: 100%;
+    font-size: 20px;
+    text-align: center;
+    line-height: 36px;
+    height: 40px;
+    width: 40px;
+    margin-left: 150px;
+    margin-top: -20px;
+    cursor: pointer;
+}

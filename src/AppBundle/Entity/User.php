@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -76,6 +77,27 @@ class User implements UserInterface, \Serializable
      * )
      */
     private $roles;
+
+    /**
+     * @var string
+     */
+    private $newPassword;
+
+
+    /**
+     * @var string
+     */
+    private $confirmPassword;
+
+    /**
+     * @var bool
+     */
+    private $deleteProfilePicture;
+
+    /**
+     * @var File
+     */
+    private $profilePictureFile;
 
     /**
      * User constructor.
@@ -268,6 +290,70 @@ class User implements UserInterface, \Serializable
 
     public function getFullName() {
         return $this->firstName . ' ' . $this->lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewPassword()
+    {
+        return $this->newPassword;
+    }
+
+    /**
+     * @param string $newPassword
+     */
+    public function setNewPassword($newPassword)
+    {
+        $this->newPassword = $newPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConfirmPassword()
+    {
+        return $this->confirmPassword;
+    }
+
+    /**
+     * @param string $confirmPassword
+     */
+    public function setConfirmPassword($confirmPassword)
+    {
+        $this->confirmPassword = $confirmPassword;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDeleteProfilePicture()
+    {
+        return $this->deleteProfilePicture;
+    }
+
+    /**
+     * @param bool $deleteProfilePicture
+     */
+    public function setDeleteProfilePicture($deleteProfilePicture)
+    {
+        $this->deleteProfilePicture = $deleteProfilePicture;
+    }
+
+    /**
+     * @return File
+     */
+    public function getProfilePictureFile()
+    {
+        return $this->profilePictureFile;
+    }
+
+    /**
+     * @param File $profilePictureFile
+     */
+    public function setProfilePictureFile($profilePictureFile)
+    {
+        $this->profilePictureFile = $profilePictureFile;
     }
 
     /**

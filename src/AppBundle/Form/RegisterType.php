@@ -3,15 +3,14 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class RegisterType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -22,25 +21,13 @@ class UserType extends AbstractType
             ->add('firstName')
             ->add('lastName')
             ->add('username')
-            ->add('email', EmailType::class)
-            ->add('newPassword', RepeatedType::class, [
+            ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'required' => false
+                'required' => true,
+                'first_options' => ['label' => 'Password'],
+                'second_options' => ['label' => 'Repeat Password']
             ])
-            ->add('deleteProfilePicture', CheckboxType::class, [
-                'label' => false,
-                'required' => false,
-                'attr' => [
-                    'class' => 'hidden'
-                ]
-            ])
-            ->add('profilePictureFile', FileType::class, [
-                'required' => false,
-                'attr' => [
-                    'accept' => 'image/*'
-                ]
-            ])
-            ->add('confirmPassword', PasswordType::class);
+            ->add('email', EmailType::class);
     }/**
      * {@inheritdoc}
      */
