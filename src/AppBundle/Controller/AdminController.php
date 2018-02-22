@@ -5,20 +5,53 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Message;
 use AppBundle\Entity\Project;
 use AppBundle\Entity\ProjectView;
+use AppBundle\Entity\SiteText;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends Controller
 {
+
     private function getFirstDayOfTheMonth() {
         $now = new \DateTime();
         $year = $now->format('Y');
         $month = $now->format('m');
 
         return new \DateTime($year . '-' . $month . '-' . '01');
+    }
+
+    private function addSiteText($name, $content) {
+
+        $siteText = $this->getDoctrine()
+            ->getRepository(SiteText::class)
+            ->findOneBy(['name' => $name]);
+
+        if($siteText == null) {
+            $siteText = new SiteText();
+            $siteText->setName($name);
+            $siteText->setText($content);
+        }
+        else {
+            $siteText->setText($content);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($siteText);
+        $em->flush();
+    }
+
+    private function getSiteText($name) {
+        $siteText = $this->getDoctrine()
+            ->getRepository(SiteText::class)
+            ->findOneBy(['name' => $name]);
+
+        if($siteText != null) {
+            return $siteText->getText();
+        }
     }
 
     /**
@@ -31,6 +64,8 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/dashboard", name="admin_dashboard")
+     *
+     * @Method({"GET"})
      */
     public function dashboardAction()
     {
@@ -55,10 +90,41 @@ class AdminController extends Controller
             ->getSingleScalarResult();
 
 
+        $homeLargeText = $this->getSiteText('home_page_text');
+        $homeDescription = $this->getSiteText('home_page_description');
+
         return $this->render('admin/dashboard.html.twig', [
             'registered_users_this_month' => $registeredUsersThisMonth,
-            'project_views_this_month' => $projectsViewsThisMonth
+            'project_views_this_month' => $projectsViewsThisMonth,
+            'home_large_text' => $homeLargeText,
+            'home_description' => $homeDescription
         ]);
+    }
+
+    /**
+     * @Route("/admin/dashboard", name="admin_dashboard_edit")
+     *
+     * @Method({"POST"})
+     */
+    public function dashboardEditAction(Request $request)
+    {
+        $image = $request->files->get('portfolio_picture');
+        $largeText = $request->get('home_text');
+        $description = $request->get('home_description');
+
+                if($image != null) {
+                    $image->move('img/', 'georgi-keranov.jpg');
+                }
+
+                if($largeText) {
+                    $this->addSiteText('home_page_text', $largeText);
+                }
+
+                if($description) {
+                    $this->addSiteText('home_page_description', $description);
+                }
+
+        return $this->redirectToRoute('homepage');
     }
 
     /**

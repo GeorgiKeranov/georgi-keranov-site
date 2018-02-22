@@ -500,3 +500,27 @@ hr {
     margin-top: 120px;
     cursor: pointer;
 }
+
+.portofilo-pic {
+    width: 300px;
+    height: 300px;
+}
+
+.portfolio-pic img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#remove-portfolio-pic {
+    position: absolute;
+    background-color: red;
+    border-radius: 100%;
+    font-size: 20px;
+    text-align: center;
+    line-height: 36px;
+    height: 40px;
+    width: 40px;
+    margin-left: 320px;
+    margin-top: -10px;
+    cursor: pointer;
+}
