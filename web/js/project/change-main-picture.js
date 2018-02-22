@@ -33,3 +33,44 @@ function nextImage() {
     }
 
 }
+
+function previousImage() {
+
+    var bigProjectImg = $('#big-project-image');
+    // Getting the image index of selected.
+    var index = bigProjectImg.attr('data-selected');
+
+    // Checking if there is image -1 to that index.
+    index--;
+    if($('#project-image-' + index).length) {
+        setImage(index);
+    } else {
+
+        var smallPicturesCount = $('.small-project-image').length;
+
+        if(index == 0)
+            setImage(smallPicturesCount);
+        else
+            setImage(smallPicturesCount - 1);
+    }
+
+}
+
+$(document).ready(function() {
+
+    // If project-image with id 0 exists set this to the bigger image.
+    if($('#project-image-0').length) {
+        setImage(0);
+    }
+
+    // Else if project image with id 1 exists set this to the bigger image.
+    else if($('#project-image-1').length) {
+        setImage(1);
+    }
+
+    // Else set no image picture to the bigger image.
+    else {
+        $('#big-project-image').attr('src', '../../img/no-image-available.png');
+    }
+
+});
