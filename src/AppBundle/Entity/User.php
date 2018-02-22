@@ -68,6 +68,14 @@ class User implements UserInterface, \Serializable
     private $profilePicture;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_registered", type="datetime")
+     */
+    private $dateRegistered;
+
+
+    /**
      * @var Collection|Role[]
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role")
@@ -252,6 +260,22 @@ class User implements UserInterface, \Serializable
     public function setProfilePicture($profilePicture)
     {
         $this->profilePicture = $profilePicture;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateRegistered()
+    {
+        return $this->dateRegistered;
+    }
+
+    /**
+     * @param \DateTime $dateRegistered
+     */
+    public function setDateRegistered($dateRegistered)
+    {
+        $this->dateRegistered = $dateRegistered;
     }
 
     /**

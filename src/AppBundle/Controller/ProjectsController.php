@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Project;
+use AppBundle\Entity\ProjectView;
 use AppBundle\Form\ProjectType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -33,6 +34,24 @@ class ProjectsController extends Controller
         return $imageName;
     }
 
+    private function addProjectViewWithIp($ip) {
+
+        // First check if this ip exists in the database.
+        $repo = $this->getDoctrine()->getRepository(ProjectView::class);
+        $isExisting = $repo->findOneBy(['ip' => $ip]);
+
+        // The ip is not registered so we add it to database.
+        if($isExisting == null) {
+            $newProjectView = new ProjectView();
+            $newProjectView->setIp($ip);
+            $newProjectView->setDateViewed(new \DateTime());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newProjectView);
+            $em->flush();
+        }
+    }
+
     /**
      * @Route("/projects", name="projects")
      */
@@ -49,8 +68,10 @@ class ProjectsController extends Controller
     /**
      * @Route("/project/{name}", name="project_view")
      */
-    public function viewProjectAction(Project $project)
+    public function viewProjectAction(Project $project, Request $request)
     {
+        // Project views counter for the admin dashboard.
+        $this->addProjectViewWithIp($request->getClientIp());
 
         return $this->render('projects/project-view.html.twig', ['project' => $project]);
     }
@@ -359,4 +380,7 @@ class ProjectsController extends Controller
 
         return $response;
     }
+
+
+
 }

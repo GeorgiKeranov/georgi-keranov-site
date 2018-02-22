@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class UserController extends Controller
 {
@@ -38,6 +39,9 @@ class UserController extends Controller
             $role = $em->getRepository(Role::class)->findOneBy(['name' => 'ROLE_USER']);
             // Adding ROLE_USER to the new user.
             $user->setRoles([$role]);
+
+            // Set registered date.
+            $user->setDateRegistered(new \DateTime());
 
             $em->persist($user);
             $em->flush();

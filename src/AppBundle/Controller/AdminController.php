@@ -2,18 +2,24 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Image;
 use AppBundle\Entity\Message;
 use AppBundle\Entity\Project;
-use AppBundle\Form\ProjectType;
+use AppBundle\Entity\ProjectView;
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends Controller
 {
+    private function getFirstDayOfTheMonth() {
+        $now = new \DateTime();
+        $year = $now->format('Y');
+        $month = $now->format('m');
+
+        return new \DateTime($year . '-' . $month . '-' . '01');
+    }
 
     /**
      * @Route("/admin", name="admin")
@@ -28,7 +34,31 @@ class AdminController extends Controller
      */
     public function dashboardAction()
     {
-        return $this->render('admin/dashboard.html.twig');
+        $firstDayOTheMonth = $this->getFirstDayOfTheMonth();
+
+        // Getting the number of registered users this month.
+        $userRepo = $this->getDoctrine()->getRepository(User::class);
+        $registeredUsersThisMonth = $userRepo->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->where('u.dateRegistered > :date')
+            ->setParameter('date', $firstDayOTheMonth)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        // Getting the number of viewed projects this month.
+        $projectViewRepo = $this->getDoctrine()->getRepository(ProjectView::class);
+        $projectsViewsThisMonth = $projectViewRepo->createQueryBuilder('pv')
+            ->select('count(pv.id)')
+            ->where('pv.dateViewed > :date')
+            ->setParameter('date', $firstDayOTheMonth)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+        return $this->render('admin/dashboard.html.twig', [
+            'registered_users_this_month' => $registeredUsersThisMonth,
+            'project_views_this_month' => $projectsViewsThisMonth
+        ]);
     }
 
     /**
