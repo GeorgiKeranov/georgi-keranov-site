@@ -21,7 +21,7 @@
         <tbody>
 
         {% for user in users %}
-            <tr class="table-warning">
+            <tr id="user-{{ user.id }}" class="table-warning">
                 <td>
                     {% if user.profilePicture %}
                         <img class="img-user-table" src="{{ asset('uploads/images/') ~ user.profilePicture }}"/>
@@ -43,7 +43,7 @@
                     </button>
                 </td>
                 <td>
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" onclick="deleteUser({{ user.id }})">
                         <span class="fa fa-trash"></span>
                     </button>
                 </td>
@@ -57,5 +57,5 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/frameworks/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('js/users/roles-ajax.js') }}"></script>
+    <script src="{{ asset('js/users/users-ajax.js') }}"></script>
 {% endblock %}

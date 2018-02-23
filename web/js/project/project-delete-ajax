@@ -22,7 +22,7 @@ url = url[0] + "//" + url[2] + "/";
 function deleteProjectAJAX(name, index) {
 
     $.ajax({
-        url: url + 'admin/project/remove/' + name,
+        url: url + 'admin/project/delete/' + name,
         processData: false,
         contentType: false,
         type: 'POST',

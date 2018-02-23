@@ -204,7 +204,7 @@ class ProjectsController extends Controller
     }
 
     /**
-     * @Route("/admin/project/remove/{name}", name="project_remove")
+     * @Route("/admin/project/delete/{name}", name="project_delete")
      * @Method({"POST"})
      */
     public function deleteProjectAction($name)

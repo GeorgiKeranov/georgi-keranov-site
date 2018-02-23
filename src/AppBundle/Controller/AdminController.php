@@ -286,4 +286,86 @@ class AdminController extends Controller
         return $response;
     }
 
+    /**
+     * @Route("/admin/role/delete", name="admin_delete_role")
+     *
+     * @Method({"POST"})
+     */
+    public function deleteUserRole(Request $request)
+    {
+
+        $responseParams = [ 'error' => false ];
+
+        $userId = $request->request->get('user_id');
+        $roleName = $request->request->get('role_name');
+
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($userId);
+
+        if($user) {
+
+            if($role = $user->isRoleExisting($roleName)) {
+                $user->deleteRole($role);
+                $this->getDoctrine()->getManager()->flush();
+            }
+
+            else {
+                $responseParams = [
+                    'error' => true,
+                    'message' => 'This role doesn\'t exists in the user'
+                ];
+            }
+
+        }
+        else {
+            $responseParams = [
+                'error' => true,
+                'message' => 'User with this id doesn\'t exists.'
+            ];
+        }
+
+        $response = new Response(json_encode($responseParams));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/admin/user/delete/{id}", name="admin_delete_user")
+     *
+     * @Method({"POST"})
+     */
+    public function deleteUser($id) {
+
+        $responseParams = ['error' => false];
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->find(User::class, $id);
+
+        if($user) {
+
+            if($profilePic = $user->getProfilePicture()) {
+                // Deleting profile picture file from local storage.
+                $imagesPath = $this->container->getParameter('images_save_path');
+                unlink($imagesPath . $profilePic);
+            }
+
+            $em->remove($user);
+            $em->flush();
+        }
+
+        else {
+            $responseParams = [
+                'error' => true,
+                'message' => 'User is not existing!'
+            ];
+        }
+
+        $response = new Response(json_encode($responseParams));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
 }

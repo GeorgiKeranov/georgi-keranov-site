@@ -312,8 +312,21 @@ class User implements UserInterface, \Serializable
         return $roles_names;
     }
 
+    public function isRoleExisting($name) {
+        foreach ($this->roles as $role) {
+            if($role->getName() == $name)
+                return $role;
+        }
+
+        return false;
+    }
+
     public function addRole(Role $role) {
         $this->roles->add($role);
+    }
+
+    public function deleteRole(Role $role) {
+        $this->roles->removeElement($role);
     }
 
     public function getFullName() {
