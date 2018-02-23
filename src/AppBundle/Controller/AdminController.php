@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Message;
 use AppBundle\Entity\Project;
 use AppBundle\Entity\ProjectView;
+use AppBundle\Entity\Role;
 use AppBundle\Entity\SiteText;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -210,7 +211,11 @@ class AdminController extends Controller
      */
     public function usersAction()
     {
-        return $this->render('admin/users.html.twig');
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findAll();
+
+        return $this->render('admin/users.html.twig', ['users' => $users]);
     }
 
     /**
@@ -219,6 +224,66 @@ class AdminController extends Controller
     public function commentsAction()
     {
         return $this->render('admin/comments.html.twig');
+    }
+
+    /**
+     * @Route("/admin/role/add", name="admin_add_role")
+     *
+     * @Method({"POST"})
+     */
+    public function addUserRole(Request $request)
+    {
+
+        $responseParams = [ 'error' => false ];
+
+        $newRoleName = $request->request->get('role_name');
+        // Get role by name from database.
+        $role = $this->getDoctrine()
+            ->getRepository(Role::class)
+            ->findOneBy(['name' => $newRoleName]);
+
+        if($role) {
+            // Get the user by id from database.
+            $userId = $request->request->get('user_id');
+            $user = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->find($userId);
+
+            if($user) {
+                // Check if user have this role already.
+                if($user->checkIfUserHasRole($newRoleName)) {
+                    $responseParams = [
+                        'error' => true,
+                        'message' => 'This user have that role already'
+                    ];
+                }
+
+                // Adding this role to the user in database.
+                else {
+                    $user->addRole($role);
+                    $this->getDoctrine()->getManager()->flush();
+                }
+            }
+
+            // If user with this id is not existing
+            else {
+                $responseParams = [
+                    'error' => true,
+                    'User with this id doesn\'t exists in database'
+                ];
+            }
+        }
+        else {
+            $responseParams = [
+                'error' => true,
+                'This role doesn\'t exists in database'
+            ];
+        }
+
+        $response = new Response(json_encode($responseParams));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
 }

@@ -1,11 +1,10 @@
 {% extends 'admin/admin.html.twig' %}
 
-{% block main %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}">
+{% endblock %}
 
-    <a href="#" class="btn btn-outline-warning btn-block">
-        <span class="fa fa-plus"></span>
-        Add new user
-    </a>
+{% block main %}
 
     <table class="table table-hover">
         <thead>
@@ -14,31 +13,49 @@
             <th>Full name</th>
             <th>Username</th>
             <th>Roles</th>
-            <th>Edit roles</th>
-            <th>Delete</th>
+            <th>Add role</th>
+            <th>Delete role</th>
+            <th>Delete user</th>
         </tr>
         </thead>
         <tbody>
-        <tr class="table-warning">
-            <td>
-                <img class="img-user-table" src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"/>
-            </td>
-            <td>Georgi Keranov</td>
-            <td>bek4o</td>
-            <td>ROLE_ADMIN, ROLE_USER</td>
-            <td>
-                <a href="#" class="btn btn-primary btn-block">
-                    <span class="fa fa-edit"></span>
-                </a>
-            </td>
-            <td>
-                <a href="#" class="btn btn-danger btn-block">
-                    <span class="fa fa-trash"></span>
-                </a>
-            </td>
-        </tr>
+
+        {% for user in users %}
+            <tr class="table-warning">
+                <td>
+                    {% if user.profilePicture %}
+                        <img class="img-user-table" src="{{ asset('uploads/images/') ~ user.profilePicture }}"/>
+                    {% else %}
+                        <img class="img-user-table" src="{{ asset('img/no-profile-picture.png') }}"/>
+                    {% endif %}
+                </td>
+                <td>{{ user.fullName }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.roles|join(', ') }}</td>
+                <td>
+                    <button class="btn btn-success" onclick="addRole({{ user.id }})">
+                        <span  class="fa fa-plus"></span>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" onclick="deleteRole({{ user.id }})">
+                        <span class="fa fa-minus"></span>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-danger">
+                        <span class="fa fa-trash"></span>
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
 
         </tbody>
     </table>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/frameworks/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/users/roles-ajax.js') }}"></script>
 {% endblock %}

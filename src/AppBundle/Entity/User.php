@@ -312,6 +312,10 @@ class User implements UserInterface, \Serializable
         return $roles_names;
     }
 
+    public function addRole(Role $role) {
+        $this->roles->add($role);
+    }
+
     public function getFullName() {
         return $this->firstName . ' ' . $this->lastName;
     }
@@ -378,6 +382,16 @@ class User implements UserInterface, \Serializable
     public function setProfilePictureFile($profilePictureFile)
     {
         $this->profilePictureFile = $profilePictureFile;
+    }
+
+    public function checkIfUserHasRole($roleName) {
+
+        foreach ($this->roles as $role) {
+            if ($role->getName() == $roleName)
+                return true;
+        }
+
+        return false;
     }
 
     /**
