@@ -11,10 +11,12 @@
             <div class="col-md-6">
                 <div class="description">
                     {% if message.title %}
-                        <h5 class="text-center">{{ message.title }}</h5>
-                        <hr/>
+                        <h4 class="text-center">{{ message.title }}</h4>
+                    {% else %}
+                        <h4 class="text-center">[ EMPTY TITLE ]</h4>
                     {% endif %}
-                    {{ message.message }}
+                    <hr/>
+                    <span class="message">{{ message.message|nl2br }}</span>
                 </div>
             </div>
             <div class="col-md-6">

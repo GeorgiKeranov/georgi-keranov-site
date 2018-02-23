@@ -524,3 +524,7 @@ hr {
     margin-top: -10px;
     cursor: pointer;
 }
+
+.message {
+    font-size: 20px;
+}
