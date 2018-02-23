@@ -55,7 +55,7 @@ class ProjectsController extends Controller
     /**
      * @Route("/projects", name="projects")
      */
-    public function projectsAction()
+    public function viewProjectsAction()
     {
         $allProjects = $this
             ->getDoctrine()
@@ -210,31 +210,46 @@ class ProjectsController extends Controller
     public function deleteProjectAction($name)
     {
 
+        $responseParams = [ 'error' => false];
+
         // Finding the project for deleting by name.
         $project = $this->getDoctrine()
             ->getRepository(Project::class)
             ->findOneBy(['name' => $name]);
 
-        // Deleting images that are saved in the local storage.
-        $images = $project->getImages();
-        $pathToImages = $this->container->getParameter('images_save_path');
+        if($project) {
+            // Deleting images that are saved in the local storage.
+            $images = $project->getImages();
+            $pathToImages = $this->container->getParameter('images_save_path');
 
-        if($images) {
-            foreach($images as $image) {
-                deleteImageByName($image->getName());
+            if ($images) {
+                foreach ($images as $image) {
+                    deleteImageByName($image->getName());
+                }
             }
-        }
-        
-        if($mainImage = $project->getimageName()) {
-            deleteImageByName($mainImage);
+
+            if ($mainImage = $project->getimageName()) {
+                deleteImageByName($mainImage);
+            }
+
+            // Deleting project and related fields.
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($project);
+            $em->flush();
         }
 
-        // Deleting project and related fields.
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($project);
-        $em->flush();
+        // If project doesn't exists.
+        else {
+            $responseParams = [
+              'error' => true,
+              'message' => 'Project doesn\'t exists'
+            ];
+        }
 
-        return $this->redirectToRoute('admin_projects');
+        $response = new Response(json_encode($responseParams));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
     /**

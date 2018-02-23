@@ -1,0 +1,40 @@
+function deleteProject(projectName, indexFromTable) {
+
+    // Prompt alert are you sure you want to delete this project.
+    swal({
+        title: "Are you sure?",
+        text: "Are you sure you want to delete " + projectName + " ?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        confirmButtonColor: "#ec6c62"
+    }, function() {
+        deleteProjectAJAX(projectName, indexFromTable)
+    });
+
+}
+
+// Getting the url of the site
+// Example: https://site.com/
+var url = window.location.href.split("/");
+url = url[0] + "//" + url[2] + "/";
+
+function deleteProjectAJAX(name, index) {
+
+    $.ajax({
+        url: url + 'admin/project/remove/' + name,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (data) {
+
+            if(data['error'])
+                swal('Error', data['message'], 'error');
+
+            if(!data['error']) {
+                $('#project-' + index).remove();
+                swal('Success', name + ' was successfully deleted!', 'success');
+            }
+        }
+    });
+}

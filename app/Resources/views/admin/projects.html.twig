@@ -1,5 +1,9 @@
 {% extends 'admin/admin.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}">
+{% endblock %}
+
 {% block main %}
 
     <a href="{{ path('project_add') }}" class="btn btn-info btn-block">
@@ -19,18 +23,16 @@
         </thead>
         <tbody>
         {% for project in projects %}
-        <tr class="table-warning">
+        <tr id="project-{{ loop.index }}" class="table-warning">
             <td>
                 <a href="{{ path('project_edit', { 'name': project.name }) }}" class="btn btn-primary btn-block">
                     <span class="fa fa-edit"></span>
                 </a>
             </td>
             <td>
-                <form method="POST" action="{{ path('project_remove', { 'name': project.name }) }}">
-                    <button type="submit" class="btn btn-danger btn-block">
-                        <span class="fa fa-trash"></span>
-                    </button>
-                </form>
+                <button class="btn btn-danger btn-block" onclick="deleteProject('{{ project.name }}', {{ loop.index }})">
+                    <span class="fa fa-trash"></span>
+                </button>
             </td>
             <td>
                 {% if project.imageName %}
@@ -47,4 +49,9 @@
         </tbody>
     </table>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/frameworks/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/project/project-delete-ajax') }}"></script>
 {% endblock %}
