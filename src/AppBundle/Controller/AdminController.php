@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\Message;
 use AppBundle\Entity\Project;
 use AppBundle\Entity\ProjectView;
@@ -223,8 +224,75 @@ class AdminController extends Controller
      */
     public function commentsAction()
     {
-        return $this->render('admin/comments.html.twig');
+        $comments = $this->getDoctrine()
+            ->getRepository(Comment::class)
+            ->findBy([], ['created' => 'DESC']);
+
+        return $this->render('admin/comments.html.twig', ['comments' => $comments]);
     }
+
+    /**
+     * @Route("/admin/comments/{id}/edit", name="admin_comment_edit")
+     *
+     * @Method({"POST"})
+     */
+    public function commentEditAction($id, Request $request) {
+
+        $em = $this->getDoctrine()->getManager();
+        $comment = $em->find(Comment::class, $id);
+
+        $responseParams = ['error' => false];
+
+        if($comment) {
+            $newCommentText = $request->request->get('comment');
+            $comment->setComment($newCommentText);
+
+            $em->flush();
+        }
+
+        else {
+            $responseParams = [
+                'error' => true,
+                'message' => 'Comment doesn\'t exists.'
+            ];
+        }
+
+        $response = new Response(json_encode($responseParams));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/admin/comments/{id}/delete", name="admin_comment_delete")
+     *
+     * @Method({"POST"})
+     */
+    public function commentDeleteAction($id, Request $request) {
+
+        $em = $this->getDoctrine()->getManager();
+        $comment = $em->find(Comment::class, $id);
+
+        $responseParams = ['error' => false];
+
+        if($comment) {
+            $em->remove($comment);
+            $em->flush();
+        }
+
+        else {
+            $responseParams = [
+                'error' => true,
+                'message' => 'Comment doesn\'t exists.'
+            ];
+        }
+
+        $response = new Response(json_encode($responseParams));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
 
     /**
      * @Route("/admin/role/add", name="admin_add_role")

@@ -139,9 +139,7 @@
                     {% if comment.user.profilePicture %}
                         <img class="profile-pic-comment"
                              src="{{ asset('uploads/images/') ~ comment.user.profilePicture }}">
-                    {% endif %}
-
-                    {% if not comment.user.profilePicture %}
+                    {% else %}
                         <img class="profile-pic-comment" src="{{ asset('img/no-profile-picture.png') }}">
                     {% endif %}
 
