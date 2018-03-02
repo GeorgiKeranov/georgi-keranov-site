@@ -224,12 +224,12 @@ class ProjectsController extends Controller
 
             if ($images) {
                 foreach ($images as $image) {
-                    deleteImageByName($image->getName());
+                    $this->deleteImageByName($image->getName());
                 }
             }
 
             if ($mainImage = $project->getimageName()) {
-                deleteImageByName($mainImage);
+                $this->deleteImageByName($mainImage);
             }
 
             // Deleting project and related fields.
