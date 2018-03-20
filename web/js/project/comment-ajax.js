@@ -1,20 +1,20 @@
 var commentPrototype = "<div id=\"comment-__COMMENT_ID__\" class=\"row margin-top-10\">\n" +
     "        <div class=\"col\">\n" +
-    "            <div class=\"row gray\">\n" +
+    "            <div class=\"row\">\n" +
     "                <div class=\"col-md-2 text-center\">\n" +
     "                    <img class=\"profile-pic-comment\"\n" +
     "                         src=\"__PROFILE_PIC_URL__\">\n" +
     "                </div>\n" +
     "                <div class=\"col-md-10\">\n" +
     "                    <div id=\"comment-details-__COMMENT_ID__\" class=\"card border-secondary mb-3\" style=\"width: 100%\">\n" +
-    "                        <div class=\"card-header\">\n" +
+    "                        <div class=\"card-header gray\">\n" +
     "                            <span class=\"float-left\">__FULL_NAME__ commented on __DATE_CREATED__</span>\n" +
     "                            <span class=\"float-right\">\n" +
     "                                <i class=\"fa fa-edit edit-comment\" onclick=\"showEditComment(__COMMENT_ID__)\"></i> <i class=\"fa fa-remove delete-comment\" onclick=\"deleteComment(__COMMENT_ID__)\"></i>\n" +
     "                            </span>" +
     "                        </div>\n" +
     "                        <div class=\"card-body\">\n" +
-    "                            <p class=\"card-text\">__COMMENT__</p>\n" +
+    "                            <p class=\"card-text gray\">__COMMENT__</p>\n" +
     "                        </div>\n" +
     "                    </div>\n" +
     "                </div>\n" +

@@ -54,9 +54,10 @@ hr {
 
 .desc {
     color:white;
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 25px;
+    font-weight: 600;
     letter-spacing: 1px;
+    font-style: italic;
 }
 
 .title {
@@ -430,10 +431,6 @@ hr {
     margin-right: 10px;
 }
 
-.gray div, p{
-    color: #919aa1 !important;
-}
-
 .profile-pic-comment {
     height: 100px;
     max-width: 100%;
@@ -535,4 +532,8 @@ hr {
 
 #role-delete {
     background-color: red;
+}
+
+.gray {
+    color: #787878;
 }

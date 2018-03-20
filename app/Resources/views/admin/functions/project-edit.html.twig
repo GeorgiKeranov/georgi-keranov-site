@@ -33,6 +33,12 @@
                     <div class="col">
                         <div id="images" class="row">
 
+                            <div class="col">
+                                <div class="image-add center" onclick="addNewImage()">
+                                    <span class="fa fa-plus"></span>
+                                </div>
+                            </div>
+
                             {% for image in project.images %}
                                 <div id="existing-image-{{ loop.index }}" class="col margin-bot-10">
                                     <div class="image-view center">
@@ -42,13 +48,6 @@
                                     </div>
                                 </div>
                             {% endfor %}
-
-
-                            <div class="col">
-                                <div class="image-add center" onclick="addNewImage()">
-                                    <span class="fa fa-plus"></span>
-                                </div>
-                            </div>
 
                         </div>
                     </div>

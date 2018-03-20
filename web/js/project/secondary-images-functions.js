@@ -13,7 +13,7 @@ var newImagesIndex = 0;
 
 function addNewImage() {
 
-    $('#images').prepend(dataPrototypeImage.replace(/index/g, newImagesIndex));
+    $('#images').append(dataPrototypeImage.replace(/index/g, newImagesIndex));
     var newInput = $('#appbundle_project_imageFiles_' + newImagesIndex);
 
     // Hiding the new image until we have a file in the input.
