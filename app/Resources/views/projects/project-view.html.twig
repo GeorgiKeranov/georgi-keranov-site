@@ -27,11 +27,13 @@
     <hr/>
 
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-12 col-lg-5">
             <div class="row">
                 <div class="col">
                     <span id="previous-image" class="fa fa-arrow-circle-left" onclick="previousImage()"></span>
+                    <div class="pull-right">
                     <span id="next-image" class="fa fa-arrow-circle-right" onclick="nextImage()"></span>
+                    </div>
                     <div class="big-image-container">
                         <img class="big-project-image"
                              id="big-project-image"
@@ -43,7 +45,7 @@
 
             <div class="row">
                 {% if project.imageName %}
-                    <div class="col-md-3">
+                    <div class="col-3 text-center">
                         <img class="small-project-image"
                              id="project-image-0"
                              src="{{ asset('/uploads/images/') ~ project.imageName }}"
@@ -52,7 +54,7 @@
                 {% endif %}
 
                 {% for image in project.images %}
-                    <div class="col-md-3">
+                    <div class="col-3 text-center">
                         <img class="small-project-image"
                              id="project-image-{{ loop.index }}"
                              src="{{ asset('/uploads/images/') ~ image.name }}"
@@ -62,7 +64,9 @@
             </div>
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-12 col-lg-7 mt-2">
+            
+            <hr/>
 
             <div class="row">
                 <div class="col-5">
@@ -92,20 +96,23 @@
 
             <div class="row margin-top-10">
                 <div class="col">
-                    <div class="social-icons icon-circle">
+                    <div class="pull-left social-icons icon-circle">
                         <h5>Github link:
                             <a target="_blank" href="{{ project.githubLink }}">
                                 <i class="fa fa-github"></i>
                             </a>
                         </h5>
                     </div>
-                </div>
-                <div class="col">
-                    <h5> Youtube link:
-                        <a target="_blank" href="{{ project.youtubeLink }}">
-                            <i class="fa fa-youtube-play"></i>
-                        </a>
-                    </h5>
+                
+                    {% if project.youtubeLink %}
+                    <div class="pull-right">
+                        <h5> Youtube link:
+                            <a target="_blank" href="{{ project.youtubeLink }}">
+                                <i class="fa fa-youtube-play"></i>
+                            </a>
+                        </h5>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
 
@@ -133,7 +140,7 @@
                 <textarea class="form-control" type="text" id="new-comment"
                           placeholder="Add new comment"></textarea>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 text-center mt-2">
                 {% if app.user %}
                     <button class="btn btn-outline-success" onclick="comment()">Comment</button>
                 {% else %}

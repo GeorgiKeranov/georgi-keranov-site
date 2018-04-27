@@ -2,31 +2,34 @@
 
 {% block body %}
 
-    <div class="container margin-top-50">
+    <div class="container mt-3">
         <div class="row">
 
             {% for project in projects %}
-            <div class="col-md-6 margin-bot-50">
-                <h3 class="text-center">{{ project.name }}</h3>
-                {% if project.imageName %}
-                    <img src="../uploads/images/{{ project.imageName }}" class="img-thumbnail center"/>
-                {% endif %}
-                {% if not project.imageName %}
-                <img src="{{ asset('img/no-image-available.png') }}" class="img-thumbnail center"/>
-                {% endif %}
+            <div class="col-md-6 mb-4">
+                <h3 class="text-center overflow-ellipse">{{ project.name }}</h3>
+                
+                <div class="project-image-container text-center">
+                    {% if project.imageName %}
+                        <img src="../uploads/images/{{ project.imageName }}"/>
+                    {% endif %}
+                    {% if not project.imageName %}
+                        <img src="{{ asset('img/no-image-available.png') }}"/>
+                    {% endif %}
+                </div>
 
                 <div class="row margin-top-10">
-                    <div class="col">
+                    <div class="col-md-6">
                         <p>Programming languages:</p>
-                        <h5>{{ project.programmingLanguages }}</h5>
+                        <h5 class="overflow-ellipse">{{ project.programmingLanguages }}</h5>
                     </div>
-                    <div class="col">
+                    <div class="col-md-6">
                         <p>Technologies used: </p>
-                        <h5>{{ project.technologiesUsed }}</h5>
+                        <h5 class="overflow-ellipse">{{ project.technologiesUsed }}</h5>
                     </div>
                 </div>
 
-                <a href="{{ path('project_view', {'name': project.name}) }}" class="btn btn-outline-info btn-block">Read more</a>
+                <a href="{{ path('project_view', {'name': project.name}) }}" class="btn btn-info btn-block">Read more</a>
             </div>
             {% endfor %}
 

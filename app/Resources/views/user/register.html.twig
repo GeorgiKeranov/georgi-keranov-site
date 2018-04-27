@@ -1,8 +1,18 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}">
+{% endblock %}
+
 {% block body %}
 
 <div class="container margin-top-50">
+
+    {% if errorMessage is defined %}
+        <span id="error" class="hidden">
+            {{ errorMessage }}
+        </span>
+    {% endif %}
 
     <div class="form-group">
         <h1 class="text-center">Register</h1>
@@ -14,13 +24,13 @@
             {{ form_start(form) }}
 
             <div class="row">
-                <div class="col">
+                <div class="col-12 col-sm">
                     <div class="form-group">
                         {{ form_row(form.firstName, {'attr': {'class': 'form-control', 'placeholder': 'First name'}}) }}
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col-12 col-sm">
                     <div class="form-group">
                         {{ form_row(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Last name'}}) }}
                     </div>
@@ -28,13 +38,13 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col-12 col-sm">
                     <div class="form-group">
                         {{ form_row(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Username'}}) }}
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col-12 col-sm">
                     <div class="form-group">
                         {{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
                     </div>
@@ -42,12 +52,12 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col-12 col-sm">
                     <div class="form-group">
                         {{ form_row(form.password.first, {'attr': {'class': 'form-control', 'placeholder': 'Password'}}) }}
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-12 col-sm">
                     <div class="form-group">
                         {{ form_row(form.password.second, {'attr': {'class': 'form-control', 'placeholder': 'Confirm password'}}) }}
                     </div>
@@ -63,4 +73,9 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/frameworks/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/users/register-error-alert.js') }}"></script>
 {% endblock %}

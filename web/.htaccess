@@ -19,6 +19,9 @@ DirectoryIndex app.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    
+    RewriteCond %{HTTPS} !=on
+    RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
 
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the
@@ -66,3 +69,31 @@ DirectoryIndex app.php
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
+
+RewriteCond %{HTTP_REFERER} !^http://georgikeranov.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://georgikeranov.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.georgikeranov.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.georgikeranov.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://georgikeranov.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://georgikeranov.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.georgikeranov.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.georgikeranov.com$      [NC]
+RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php7_module>
+   php_flag display_errors Off
+   php_value max_execution_time 3000
+   php_value max_input_time 10000
+   php_value max_input_vars 10000
+   php_value memory_limit 128M
+   php_value post_max_size 100M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php70"
+   php_value upload_max_filesize 10M
+   php_flag zlib.output_compression Off
+</IfModule>
+# END cPanel-generated php ini directives, do not edit

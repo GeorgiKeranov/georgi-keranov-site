@@ -2,9 +2,9 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../georgi-keranov-site/vendor/autoload.php';
 if (PHP_VERSION_ID < 70000) {
-    include_once __DIR__.'/../var/bootstrap.php.cache';
+    include_once __DIR__.'/../georgi-keranov-site/var/bootstrap.php.cache';
 }
 
 $kernel = new AppKernel('prod', false);

@@ -1,8 +1,19 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.min.css') }}">
+{% endblock %}
+
 {% block body %}
 
 <div class="container margin-top-50">
+    
+    {% if error is defined %}    
+        <span id="error" class="hidden">
+            {{ error }}
+        </span>
+    {% endif %}
+    
     <div class="row justify-content-center">
         <div class="col-sm-6">
             <h2 class="page-header text-center"> Enter your credentials </h2>
@@ -35,4 +46,10 @@
     </div>
 </div>
 
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="{{ asset('js/frameworks/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/users/login-error-alert.js') }}"></script>
 {% endblock %}
