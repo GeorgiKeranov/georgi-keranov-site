@@ -13,4 +13,4 @@ This project is my portfolio and presentates projects with pictures video commen
   * Add/delete roles from users or delete user.
   * To edit/delete comments from other users.
   
-# [Pictures](https://georgikeranov.com/project/Georgi%20Keranov%20CMS%20%28%20THIS%20SITE%20%29 "Pictures") and [Video](https://www.youtube.com/watch?v=Pu8yaG9qUiQ "Video")
+# [Pictures](https://georgikeranov.com/project/Georgi%20Keranov%20CMS%20%28THIS%20SITE%29 "Pictures") and [Video](https://www.youtube.com/watch?v=Pu8yaG9qUiQ "Video")
