@@ -1,6 +1,6 @@
 # Georgi Keranov Site
 
-Custom CMS built with Symfony 3 to represent my programming projects.\
+Custom CMS built with Symfony 3 used in the past to represent my programming projects.\
 That was my first portfolio site.
 
 ## Table of contents
