@@ -26,7 +26,7 @@ That was my first portfolio site.
 This project is my portfolio and presents projects with pictures, video, comments and more.\
 Users can register, login, add a comment on projects or send messages to the admin from the contacts page.
 
-Admin has panel from who can:
+Admin has a panel from who can:
   * See site activity (new users and project views this month).
   * Edit home page picture and text.
   * Read and delete messages sent by contacts page.
