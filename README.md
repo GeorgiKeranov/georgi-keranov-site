@@ -23,15 +23,15 @@ That was my first portfolio site.
 - MySQL
 
 ## Functionalities
-This project is my portfolio and presentates projects with pictures, video, comments and more.\
-Users can register and login then comment on projects or to send message to the admin from contacts page.\
+This project is my portfolio and presents projects with pictures, video, comments and more.\
+Users can register, login, add a comment on projects or send messages to the admin from the contacts page.
 
-Admin have admin panel from who can:
+Admin has panel from who can:
   * See site activity (new users and project views this month).
   * Edit home page picture and text.
   * Read and delete messages sent by contacts page.
   * Add/edit/delete projects with pictures, youtube video, github link and text.
-  * Add/delete roles from users or delete user.
+  * Add/delete roles from users or delete user accounts.
   * To edit/delete comments from other users.
 
 ## Video Preview
